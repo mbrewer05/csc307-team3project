@@ -1,11 +1,11 @@
 import logo from './logo.svg';
-import Sidebar from './components/Sidebar.js'
+import Appbar from './components/Appbar.js'
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <Sidebar />
+      <Appbar />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

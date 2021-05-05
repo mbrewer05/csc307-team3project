@@ -4,6 +4,7 @@
 https://www.python.org/dev/peps/pep-0008/
 
 ## Javascript/React:
+https://google.github.io/styleguide/jsguide.html
 https://airbnb.io/javascript/react/
 
 # Setting up Prettier on VSCode:

@@ -7,8 +7,6 @@ https://www.python.org/dev/peps/pep-0008/
 https://airbnb.io/javascript/react/
 
 # Setting up Prettier on VSCode:
-
-##Download:
 https://create-react-app.dev/docs/setting-up-your-editor
 
 # Getting Started with Create React App

@@ -12,8 +12,6 @@
 /build
 
 # misc
-package.json
-package_lock.json
 .DS_Store
 .env.local
 .env.development.local

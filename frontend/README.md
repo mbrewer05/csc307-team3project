@@ -1,3 +1,16 @@
+# Style guides:
+
+## Python (PEP8):
+https://www.python.org/dev/peps/pep-0008/
+
+## Javascript/React:
+https://airbnb.io/javascript/react/
+
+# Setting up Prettier on VSCode:
+
+##Download:
+https://create-react-app.dev/docs/setting-up-your-editor
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

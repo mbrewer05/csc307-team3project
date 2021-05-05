@@ -7,7 +7,7 @@ https://www.python.org/dev/peps/pep-0008/
 https://airbnb.io/javascript/react/
 
 # Setting up Prettier on VSCode:
-https://create-react-app.dev/docs/setting-up-your-editor
+https://create-react-app.dev/docs/setting-up-your-editor \
 Please enable 'format on save' and set 'tab width' to 4 in the Prettier settings
 
 # Getting Started with Create React App

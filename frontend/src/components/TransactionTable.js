@@ -7,6 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -29,8 +31,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 800,
-    maxWidth: 800,
+    minWidth: 1000,
+    maxWidth: 1000,
   },
 });
 
@@ -58,6 +60,7 @@ function TransactionTable() {
             <StyledTableCell>Category</StyledTableCell>
             <StyledTableCell align="right">Amount</StyledTableCell>
             <StyledTableCell align="right">Remaining Balance</StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -70,6 +73,33 @@ function TransactionTable() {
               <TableCell>{row.category}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
               <TableCell align="right">{row.balance}</TableCell>
+              <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justify="center"
+              >
+                &nbsp;
+                <Button
+                  id="button-edit"
+                  color="inherit"
+                  variant="contained"
+                  disableElevation
+                >
+                  Edit
+                </Button>
+                &nbsp;
+                &nbsp;
+                <Button
+                  id="button-delete"
+                  color="secondary"
+                  variant="contained"
+                  disableElevation
+                >
+                      DELETE
+                </Button>
+              </Grid>
+ 
             </StyledTableRow>
           ))}
         </TableBody>

@@ -50,11 +50,11 @@ function TransactionForm() {
       <TextField id="amount" label="$ Amount" variant="outlined" />
       
       <FormControl component="fieldset">
-      <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleSpendGain}>
-        <FormControlLabel value="spent" control={<Radio />} label="Spent" />
-        <FormControlLabel value="gained" control={<Radio />} label="Gained" />
-      </RadioGroup>
-    </FormControl>
+        <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleSpendGain}>
+          <FormControlLabel value="spent" control={<Radio />} label="Spent" />
+          <FormControlLabel value="gained" control={<Radio />} label="Gained" />
+        </RadioGroup>
+      </FormControl>
 
       <FormControl className={classes.formControl}>
         <InputLabel shrink id="category">

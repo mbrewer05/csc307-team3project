@@ -28,6 +28,15 @@ const useStyles = makeStyles((theme) => ({
   selectEmpty: {
     marginTop: theme.spacing(2),
   },
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200,
+  },
 
 }));
 
@@ -46,6 +55,16 @@ function TransactionForm() {
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
+      <TextField
+        id="date"
+        label="Date"
+        type="date"
+        defaultValue=""
+        className={classes.textField}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
       <TextField id="description" label="Description" variant="outlined" />
       <TextField id="amount" label="$ Amount" variant="outlined" />
       

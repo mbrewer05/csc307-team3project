@@ -7,7 +7,8 @@ import { Toolbar } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
-import MeetingRoom from "@material-ui/icons/MeetingRoom";
+import DirectionsRun from "@material-ui/icons/DirectionsRun"
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,7 +50,7 @@ function Appbar() {
                         <Button
                             color="default"
                             variant="contained"
-                            startIcon={<MeetingRoom />}
+                            startIcon={<DirectionsRun />}
                             disableElevation
                         >
                             LOG OUT

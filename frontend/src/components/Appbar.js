@@ -8,6 +8,7 @@ import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import MeetingRoom from "@material-ui/icons/MeetingRoom";
+import AccessibleForwardIcon from '@material-ui/icons/AccessibleForward';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -49,7 +50,7 @@ function Appbar() {
                         <Button
                             color="default"
                             variant="contained"
-                            startIcon={<MeetingRoom />}
+                            startIcon={<AccessibleForwardIcon />}
                             disableElevation
                         >
                             LOG OUT

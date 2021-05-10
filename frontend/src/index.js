@@ -1,7 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import LoginPage from './LoginPage';
-import CreateAccPage from './CreateAccPage';
+import reportWebVitals from './reportWebVitals';
+import ProfilePage from "./components/ProfilePage.js"
+import SettingsPage from "./components/SettingsPage.js"
 
-ReactDOM.render(<CreateAccPage />, document.getElementById('root'))
+ReactDOM.render(
+  <React.StrictMode>
+    <SettingsPage />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+

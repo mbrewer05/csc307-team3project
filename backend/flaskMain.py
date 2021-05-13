@@ -9,7 +9,7 @@ CORS(app)
 @app.route('/users', methods=['GET', 'POST'])
 def get_users():
     
-@app.route('/users/<id>', methods=['GET', 'POST', 'DELETE'])
+@app.route('/users/<userID>', methods=['GET', 'POST', 'DELETE'])
 def get_user(id):
         
 @app.route('/users/<userId>/transactions', methods=['GET', 'POST'])

@@ -1,5 +1,8 @@
 import pymongo
 from bson import ObjectId
+import dns
+import os
+from dotenv import load_dotenv
 
 class Model(dict):
     """
@@ -33,8 +36,10 @@ class Model(dict):
             return resp
 
 class User(Model):
-    db_client = pymongo.MongoClient('localhost', 27017)  #change if your db is in another host and port
-    collection = db_client["users"]["users_list"]  #db name is 'users' and collection name is 'users_list'
+    load_dotenv()
+    MONGODB_URL = os.environ['MONGODB_URL']
+    db_client = pymongo.MongoClient(MONGODB_URL)
+    collection = db_client["budget_tracker"]["user_list"]
 
     def find_all(self):
         users = list(self.collection.find())
@@ -42,24 +47,27 @@ class User(Model):
             user["_id"] = str(user["_id"])
         return users
 
-    def find_by_name(self, name):
-        users = list(self.collection.find({"name": name}))
+    def find_by_userName(self, username):
+        users = list(self.collection.find({"username": username}))
         for user in users:
             user["_id"] = str(user["_id"])
         return users
-
+        
+        
 class Transaction(Model):
-    db_client = pymongo.MongoClient('localhost', 27017)  #change if your db is in another host and port
-    collection = db_client["users"]["users_list"]  #db name is 'users' and collection name is 'users_list'
+    load_dotenv()
+    MONGODB_URL = os.environ['MONGODB_URL']
+    db_client = pymongo.MongoClient(MONGODB_URL)
+    collection = db_client["budget_tracker"]["transaction_list"]
 
     def find_all(self):
-        users = list(self.collection.find())
-        for user in users:
-            user["_id"] = str(user["_id"])
-        return users
+        transactions = list(self.collection.find())
+        for transaction in transactions:
+            transaction["_id"] = str(transaction["_id"])
+        return transactions
 
-    def find_by_name(self, name):
-        users = list(self.collection.find({"name": name}))
-        for user in users:
-            user["_id"] = str(user["_id"])
-        return users
+    def find_by_user(self, user):
+        transactions = list(self.collection.find({"user": user}))
+        for transaction in transactions:
+            transaction["_id"] = str(transaction["_id"])
+        return transactions

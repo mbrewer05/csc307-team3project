@@ -9,6 +9,8 @@ import { Button } from "@material-ui/core";
 import { Divider } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
+import ProfilePage from "../pages/ProfilePage.js";
+
 const useStyles = makeStyles({
     list: {
         width: 250,
@@ -83,6 +85,7 @@ function TempDrawer() {
                     >
                         {list(anchor)}
                     </Drawer>
+                    
                 </React.Fragment>
             ))}
         </div>

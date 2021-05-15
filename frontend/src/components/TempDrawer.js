@@ -8,8 +8,7 @@ import { ListItemText } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { Divider } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-
-import ProfilePage from "../pages/ProfilePage.js";
+import { Link } from "react-router-dom"
 
 const useStyles = makeStyles({
     list: {
@@ -48,22 +47,22 @@ function TempDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {["Profile", "Transactions", "Statistics"].map(
-                    (text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    )
-                )}
+                <ListItem button key={"Profile"} component={Link} to="/profile">
+                    <ListItemText primary={"Profile"} />
+                </ListItem>
+                <ListItem button key={"Transactions"} component={Link} to="/transactions">
+                    <ListItemText primary={"Transactions"} />
+                </ListItem>
+                <ListItem button key={"Statistics"} component={Link} to="/stats">
+                    <ListItemText primary={"Statistics"} />
+                </ListItem>
             </List>
 
             <Divider />
             <List>
-                {["Settings"].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                <ListItem button key={"Settings"} component={Link} to="/settings">
+                    <ListItemText primary={"Settings"} />
+                </ListItem>
             </List>
         </div>
     );

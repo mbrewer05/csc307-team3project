@@ -1,4 +1,3 @@
-import Appbar from "./components/Appbar.js";
 import ProfilePage from "./pages/ProfilePage.js"
 import TransactionPage from "./pages/TransactionPage.js"
 import SettingsPage from "./pages/SettingsPage.js"

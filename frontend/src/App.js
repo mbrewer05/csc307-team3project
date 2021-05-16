@@ -9,6 +9,9 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <Switch>
+                    <Route exact path="/">
+                        <TransactionPage />
+                    </Route>
                     <Route path="/profile">
                         <ProfilePage />
                     </Route>

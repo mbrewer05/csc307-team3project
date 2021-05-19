@@ -1,0 +1,8 @@
+{
+    "_id": "string",
+    "userId": "string",
+    "date": "string",
+    "value": signed_int,
+    "name": "string",
+    "description": "string"
+}

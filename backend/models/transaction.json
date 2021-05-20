@@ -2,7 +2,7 @@
     "_id": "string",
     "userId": "string",
     "date": "string",
-    "value": signed_int,
+    "value": "number",
     "name": "string",
     "description": "string"
 }

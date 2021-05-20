@@ -3,7 +3,7 @@
     "name": "string",
     "username": "string",
     "password": "string",
-    "budget": int,
-    "time-interval": int,
-    "spending-alter": bool
+    "budget": "number",
+    "time-interval": "number",
+    "spending-alter": "Boolean"
 }

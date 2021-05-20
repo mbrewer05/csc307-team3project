@@ -21,7 +21,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the frontend directory, run:
 
-### 'npm install'
+### `npm install`
+
+to install essential packages
 
 ## Available Scripts
 

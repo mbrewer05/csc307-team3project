@@ -3,6 +3,6 @@
     "userId": "string",
     "date": "string",
     "amount": "number",
-    "catagory": "string",
+    "category": "string",
     "description": "string"
 }

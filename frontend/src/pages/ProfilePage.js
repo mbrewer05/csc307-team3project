@@ -2,8 +2,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from '@material-ui/core';
-import Checkbox from '@material-ui/core/Checkbox';
-import Appbar from "./Appbar.js";
+import Appbar from "../components/Appbar.js";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function SettingsPage() {
+function ProfilePage() {
   const classes = useStyles();
   const [value, setValue] = React.useState("");
 
@@ -24,16 +23,23 @@ function SettingsPage() {
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
-        <div>
-            <Appbar/>
-        </div>
       <div>
-        <Typography align ="center" variant="h1">Settings</Typography>
+            <Appbar />
+      </div>
+      <div>
+        <Typography align ="center" variant="h3">
+          {'Full Name\'s'}
+        </Typography>
+        <Typography align ="center" variant="h1">
+          Profile
+        </Typography>
+      </div>
+      <div>
         <Typography variant = "h3" align="left">
-          Change Name:
+          Spending Limit:
           <TextField
             id="filled-multiline-flexible"
-            label="New Name"
+            label="$"
             multiline
             rowsMax={4}
             value={value}
@@ -44,22 +50,10 @@ function SettingsPage() {
       </div>
       <div>
         <Typography variant = "h3" align="left">
-          Change Username:
+          Time Interval:
           <TextField
             id="filled-textarea"
-            label="New Username"
-            placeholder="Placeholder"
-            multiline
-            variant="filled"
-          />
-        </Typography>
-      </div>
-      <div>
-        <Typography variant = "h3" align="left">
-          Change Password:
-          <TextField
-            id="filled-multiline-static"
-            label="New Password"
+            label="Days"
             multiline
             variant="filled"
           />
@@ -100,28 +94,6 @@ function SettingsPage() {
         </br>
       </div>
       <div>
-        <Typography variant = "h3" align="left">
-          Change Spending Limit:
-          <TextField
-            id="filled-multiline-static"
-            label="New Spending Limit"
-            multiline
-            variant="filled"
-          />
-        </Typography>
-      </div>
-      <div>
-        <Typography variant = "h3" align="left">
-          Change Time Interval:
-          <TextField
-            id="filled-multiline-static"
-            label="New Time Interval"
-            multiline
-            variant="filled"
-          />
-        </Typography>
-      </div>
-      <div>
           <br>
           </br>
           <br>
@@ -132,12 +104,30 @@ function SettingsPage() {
           </br>
           <br>
           </br>
-      </div>
-      <div>
-        <Typography variant = "h3" align="left">
-          Alert When going over spending limit? 
-          <Checkbox inputProps={{ 'aria-label': 'uncontrolled-checkbox' }} />
-        </Typography>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
+          <br>
+          </br>
       </div>
       <div>
           <br>
@@ -157,4 +147,4 @@ function SettingsPage() {
   );
 }
 
-export default SettingsPage
+export default ProfilePage

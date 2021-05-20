@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mbrewer05/csc307-team3project.svg?branch=master)](https://travis-ci.com/mbrewer05/csc307-team3project)
+
 # Style guides:
 
 ## Python (PEP8):

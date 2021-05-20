@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import ProfilePage from "./components/ProfilePage.js"
-import SettingsPage from "./components/SettingsPage.js"
+import ProfilePage from "./pages/ProfilePage.js"
+import SettingsPage from "./pages/SettingsPage.js"
+import App from "./App.js"
 
 ReactDOM.render(
   <React.StrictMode>
-    <SettingsPage />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

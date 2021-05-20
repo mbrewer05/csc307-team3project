@@ -5,5 +5,5 @@
     "password": "string",
     "budget": "number",
     "time-interval": "number",
-    "spending-alter": "Boolean"
+    "spending-alter": "boolean"
 }

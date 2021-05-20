@@ -25,6 +25,10 @@ In the frontend directory, run:
 
 to install essential packages
 
+## Backend Setup
+
+In the backend directory add .env file with proper database credentials for it to function properly.
+
 ## Available Scripts
 
 In the frontend directory, you can run:

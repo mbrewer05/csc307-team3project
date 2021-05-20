@@ -1,0 +1,8 @@
+{
+    "_id": "string",
+    "userId": "string",
+    "date": "string",
+    "amount": "number",
+    "category": "string",
+    "description": "string"
+}

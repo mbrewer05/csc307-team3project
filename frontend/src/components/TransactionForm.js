@@ -10,6 +10,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-
-function TransactionForm() {
+function TransactionForm(props) {
+  const [transaction, setTransaction] = React.useState({date: '', amount: 0, type: '', category: '', description: ''});
   const classes = useStyles();
   const [val, setVal] = React.useState('');
   const [value, setValue] = React.useState('spend');
@@ -53,25 +54,64 @@ function TransactionForm() {
     setValue(event.target.value);
   };
 
+  function handleChange(event) {
+    if (event.target.name === "date")
+      setTransaction(
+        {date: event.target.value, amount: transaction['amount'], type: transaction['type'], 
+        category: transaction['category'], description: transaction['description']});
+    else if (event.target.name === "amount") {
+      setTransaction(
+        {date: transaction['date'], amount: Number(event.target.value), type: transaction['type'],
+        category: transaction['category'], description: transaction['description']});
+      }
+    else if (event.target.name === "category") {
+      setTransaction(
+        {date: transaction['date'], amount: transaction['amount'], type: transaction['type'], 
+        category: 'who knows', description: transaction['description']});
+    }
+    else if (event.target.name === "spent") {
+      if (event.target.checked)
+        setTransaction(
+          {date: transaction['date'], amount: transaction['amount'], type: "spent",
+          category: transaction['category'], description: transaction['description']});
+    }
+    else if (event.target.name === "gained") { 
+      if (event.target.checked)
+        setTransaction(
+          {date: transaction['date'], amount: transaction['amount'], type: "gained",
+          category: transaction['category'], description: transaction['description']});
+    }
+    else if (event.target.name === "description")
+      setTransaction(
+        {date: transaction['date'], amount: transaction['amount'], type: transaction['type'],
+        category: transaction['category'], description: event.target.value});
+  }
+
+  function submitTransactionForm() {
+    props.handleSubmit(transaction);
+    setVal('');
+    setValue('spend');
+  }
+
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <TextField
         id="date"
-        label="Date"
+        label="date"
+        name="date"
         type="date"
-        defaultValue=""
-        className={classes.textField}
         InputLabelProps={{
           shrink: true,
         }}
+        onChange={handleChange}
       />
-      <TextField id="description" label="Description" variant="outlined" />
-      <TextField id="amount" label="$ Amount" variant="outlined" />
+      <TextField id="description" name="description" label="description" variant="outlined" onChange={handleChange}/>
+      <TextField id="amount" name="amount" label="amount" variant="outlined" onChange={handleChange}/>
       
       <FormControl component="fieldset">
         <RadioGroup aria-label="gender" name="gender1" value={value} onChange={handleSpendGain}>
-          <FormControlLabel value="spent" control={<Radio />} label="Spent" />
-          <FormControlLabel value="gained" control={<Radio />} label="Gained" />
+          <FormControlLabel value='-' control={<Radio />} label="spent" name="spent" onChange={handleChange}/>
+          <FormControlLabel value='' control={<Radio />} label="gained" name="gained" onChange={handleChange}/>
         </RadioGroup>
       </FormControl>
 
@@ -82,32 +122,42 @@ function TransactionForm() {
         <Select
           labelId="category"
           id="category"
+          name="category"
           value={val}
-          onChange={handleChangeCategory}
+          onChange={handleChange, handleChangeCategory}
           displayEmpty
           className={classes.selectEmpty}
         >
           <MenuItem value="">
             <em>Select One</em>
           </MenuItem>
-          <MenuItem value={0}>Home & Utilities</MenuItem>
-          <MenuItem value={1}>Transportation</MenuItem>
-          <MenuItem value={2}>Groceries</MenuItem>
-          <MenuItem value={3}>Personal & Family Care</MenuItem>
-          <MenuItem value={4}>Health</MenuItem>
-          <MenuItem value={5}>Insurance</MenuItem>
-          <MenuItem value={5}>Restaurants & Dining</MenuItem>
-          <MenuItem value={6}>Shopping & Entertainment</MenuItem>
-          <MenuItem value={7}>Travel</MenuItem>
-          <MenuItem value={8}>Cash, Checks, & Misc.</MenuItem>
-          <MenuItem value={9}>Giving</MenuItem>
-          <MenuItem value={10}>Business Expenses</MenuItem>
-          <MenuItem value={11}>Education</MenuItem>
-          <MenuItem value={12}>Finance</MenuItem>
-          <MenuItem value={13}>Uncategorized</MenuItem>
+          <MenuItem value={'Home & Utilities'}>Home & Utilities</MenuItem>
+          <MenuItem value={'Transportation'}>Transportation</MenuItem>
+          <MenuItem value={'Groceries'}>Groceries</MenuItem>
+          <MenuItem value={'Personal & Family Care'}>Personal & Family Care</MenuItem>
+          <MenuItem value={'Health'}>Health</MenuItem>
+          <MenuItem value={'Insurance'}>Insurance</MenuItem>
+          <MenuItem value={'Restaurants & Dining'}>Restaurants & Dining</MenuItem>
+          <MenuItem value={'Shopping & Entertainment'}>Shopping & Entertainment</MenuItem>
+          <MenuItem value={'Travel'}>Travel</MenuItem>
+          <MenuItem value={'Cash, Checks, & Misc.'}>Cash, Checks, & Misc.</MenuItem>
+          <MenuItem value={'Giving'}>Giving</MenuItem>
+          <MenuItem value={'Business Expenses'}>Business Expenses</MenuItem>
+          <MenuItem value={'Education'}>Education</MenuItem>
+          <MenuItem value={'Finance'}>Finance</MenuItem>
+          <MenuItem value={'Uncategorized'}>Uncategorized</MenuItem>
         </Select>
       </FormControl> 
-
+      <Button
+        id="button-submit"
+        color="primary"
+        variant="contained"
+        value="Submit"
+        onClick={submitTransactionForm}
+        disableElevation
+      >
+        SUBMIT
+      </Button>
 
     </form>
   );

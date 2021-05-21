@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TransactionForm(props) {
-  const [transaction, setTransaction] = React.useState({date: '', amount: 0, type: '', category: '', description: ''});
+  const [transaction, setTransaction] = React.useState({date: '', amount: 0, spent: true, category: '', description: ''});
   const classes = useStyles();
   const [val, setVal] = React.useState('');
   const [value, setValue] = React.useState('spend');
@@ -57,34 +57,38 @@ function TransactionForm(props) {
   function handleChange(event) {
     if (event.target.name === "date")
       setTransaction(
-        {date: event.target.value, amount: transaction['amount'], type: transaction['type'], 
+        {date: event.target.value, amount: transaction['amount'], spent: transaction['spent'], 
         category: transaction['category'], description: transaction['description']});
     else if (event.target.name === "amount") {
       setTransaction(
-        {date: transaction['date'], amount: Number(event.target.value), type: transaction['type'],
+        {date: transaction['date'], amount: Number(event.target.value), spent: transaction['spent'],
         category: transaction['category'], description: transaction['description']});
       }
     else if (event.target.name === "category") {
       setTransaction(
-        {date: transaction['date'], amount: transaction['amount'], type: transaction['type'], 
+        {date: transaction['date'], amount: transaction['amount'], spent: transaction['spent'], 
         category: 'who knows', description: transaction['description']});
     }
     else if (event.target.name === "spent") {
       if (event.target.checked)
         setTransaction(
-          {date: transaction['date'], amount: transaction['amount'], type: "spent",
+          {date: transaction['date'], amount: transaction['amount'], spent: true,
           category: transaction['category'], description: transaction['description']});
     }
     else if (event.target.name === "gained") { 
       if (event.target.checked)
         setTransaction(
-          {date: transaction['date'], amount: transaction['amount'], type: "gained",
+          {date: transaction['date'], amount: transaction['amount'], spent: false,
           category: transaction['category'], description: transaction['description']});
     }
     else if (event.target.name === "description")
       setTransaction(
-        {date: transaction['date'], amount: transaction['amount'], type: transaction['type'],
+        {date: transaction['date'], amount: transaction['amount'], spent: transaction['spent'],
         category: transaction['category'], description: event.target.value});
+    else
+      setTransaction(
+        {date: transaction['date'], amount: transaction['amount'], spent: transaction['spent'],
+        category: event.target.value, description: event.target.value});
   }
 
   function submitTransactionForm() {
@@ -128,7 +132,7 @@ function TransactionForm(props) {
           displayEmpty
           className={classes.selectEmpty}
         >
-          <MenuItem value="">
+          <MenuItem value="A">
             <em>Select One</em>
           </MenuItem>
           <MenuItem value={'Home & Utilities'}>Home & Utilities</MenuItem>

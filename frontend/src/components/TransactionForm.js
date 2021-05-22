@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TransactionForm(props) {
-  const [transaction, setTransaction] = React.useState({date: '', amount: 0, spent: true, category: '', description: ''});
+  const [transaction, setTransaction] = React.useState({date: '', amount: 0, spent: '', category: '', description: ''});
   const classes = useStyles();
   const [val, setVal] = React.useState('');
   const [value, setValue] = React.useState('spend');
@@ -73,13 +73,13 @@ function TransactionForm(props) {
     else if (event.target.name === "spent") {
       if (event.target.checked)
         setTransaction(
-          {date: transaction['date'], amount: transaction['amount'], spent: true,
+          {date: transaction['date'], amount: transaction['amount'], spent: '1',
           category: transaction['category'], description: transaction['description']});
     }
     else if (event.target.name === "gained") { 
       if (event.target.checked)
         setTransaction(
-          {date: transaction['date'], amount: transaction['amount'], spent: false,
+          {date: transaction['date'], amount: transaction['amount'], spent: '0',
           category: transaction['category'], description: transaction['description']});
     }
     else if (event.target.name === "description")
@@ -129,7 +129,7 @@ function TransactionForm(props) {
           displayEmpty
           className={classes.selectEmpty}
         >
-          <MenuItem value="A">
+          <MenuItem value="">
             <em>Select One</em>
           </MenuItem>
           <MenuItem value={'HomeAndUtilities'}>Home & Utilities</MenuItem>

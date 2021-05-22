@@ -3,7 +3,7 @@
     "userId": "string",
     "date": "string",
     "amount": "number",
-    "spent": "boolean",
+    "spent": "string",
     "category": "string",
     "description": "string"
 }

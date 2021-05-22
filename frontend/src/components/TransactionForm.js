@@ -49,6 +49,7 @@ function TransactionForm(props) {
 
   const handleChangeCategory = (event) => {
     setVal(event.target.value);
+    handleChange(event);
   };    
   const handleSpendGain = (event) => {
     setValue(event.target.value);
@@ -67,7 +68,7 @@ function TransactionForm(props) {
     else if (event.target.name === "category") {
       setTransaction(
         {date: transaction['date'], amount: transaction['amount'], spent: transaction['spent'], 
-        category: 'who knows', description: transaction['description']});
+        category: event.target.value, description: transaction['description']});
     }
     else if (event.target.name === "spent") {
       if (event.target.checked)
@@ -85,10 +86,6 @@ function TransactionForm(props) {
       setTransaction(
         {date: transaction['date'], amount: transaction['amount'], spent: transaction['spent'],
         category: transaction['category'], description: event.target.value});
-    else
-      setTransaction(
-        {date: transaction['date'], amount: transaction['amount'], spent: transaction['spent'],
-        category: event.target.value, description: event.target.value});
   }
 
   function submitTransactionForm() {
@@ -128,25 +125,25 @@ function TransactionForm(props) {
           id="category"
           name="category"
           value={val}
-          onChange={handleChange, handleChangeCategory}
+          onChange={handleChangeCategory}
           displayEmpty
           className={classes.selectEmpty}
         >
           <MenuItem value="A">
             <em>Select One</em>
           </MenuItem>
-          <MenuItem value={'Home & Utilities'}>Home & Utilities</MenuItem>
+          <MenuItem value={'HomeAndUtilities'}>Home & Utilities</MenuItem>
           <MenuItem value={'Transportation'}>Transportation</MenuItem>
           <MenuItem value={'Groceries'}>Groceries</MenuItem>
-          <MenuItem value={'Personal & Family Care'}>Personal & Family Care</MenuItem>
+          <MenuItem value={'PersonalAndFamilyCare'}>Personal & Family Care</MenuItem>
           <MenuItem value={'Health'}>Health</MenuItem>
           <MenuItem value={'Insurance'}>Insurance</MenuItem>
-          <MenuItem value={'Restaurants & Dining'}>Restaurants & Dining</MenuItem>
-          <MenuItem value={'Shopping & Entertainment'}>Shopping & Entertainment</MenuItem>
+          <MenuItem value={'RestaurantsAndDining'}>Restaurants & Dining</MenuItem>
+          <MenuItem value={'ShoppingAndEntertainment'}>Shopping & Entertainment</MenuItem>
           <MenuItem value={'Travel'}>Travel</MenuItem>
-          <MenuItem value={'Cash, Checks, & Misc.'}>Cash, Checks, & Misc.</MenuItem>
+          <MenuItem value={'CashChecksAndMisc.'}>Cash, Checks, & Misc.</MenuItem>
           <MenuItem value={'Giving'}>Giving</MenuItem>
-          <MenuItem value={'Business Expenses'}>Business Expenses</MenuItem>
+          <MenuItem value={'BusinessExpenses'}>Business Expenses</MenuItem>
           <MenuItem value={'Education'}>Education</MenuItem>
           <MenuItem value={'Finance'}>Finance</MenuItem>
           <MenuItem value={'Uncategorized'}>Uncategorized</MenuItem>

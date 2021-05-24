@@ -48,7 +48,16 @@ def get_user(userID):
 def get_transactions(userId):
     if request.method == 'GET':
         transactions = Transaction().find_by_user(userId)
+        
+        search_category = request.args.get('category') 
+        search_spent = request.args.get('spent')
+
+        if search_category and not search_spent:
+            transactions = Transaction().find_by_category(search_category)
+        if search_category and search_spent:
+            transactions = Transaction().find_by_category_spent(search_category, search_spent)
         return {"transaction_list": transactions}
+
     elif request.method == 'POST':
         transactionToAdd = request.get_json()
         transactionToAdd["userID"] = userId
@@ -61,11 +70,12 @@ def get_transactions(userId):
 @app.route('/users/<userID>/transactions/<transactionID>', methods=['GET', 'POST', 'DELETE'])
 def get_transaction(userID, transactionID):
         if request.method == 'GET':
-            transaction = Transaction({"_id": transactionId})
+            transaction = Transaction({"_id": transactionID})
             if transaction.reload():
                 return transaction
             else:
                 return jsonify({"error": "Transaction not found"}), 404
+
         elif request.method == 'POST':
             transactionToUpdate = request.get_json()
             updatedTransaction = Transaction(transactionToUpdate)

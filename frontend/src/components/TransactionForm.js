@@ -96,15 +96,15 @@ function TransactionForm() {
           <MenuItem value={3}>Personal & Family Care</MenuItem>
           <MenuItem value={4}>Health</MenuItem>
           <MenuItem value={5}>Insurance</MenuItem>
-          <MenuItem value={5}>Restaurants & Dining</MenuItem>
-          <MenuItem value={6}>Shopping & Entertainment</MenuItem>
-          <MenuItem value={7}>Travel</MenuItem>
-          <MenuItem value={8}>Cash, Checks, & Misc.</MenuItem>
-          <MenuItem value={9}>Giving</MenuItem>
-          <MenuItem value={10}>Business Expenses</MenuItem>
-          <MenuItem value={11}>Education</MenuItem>
-          <MenuItem value={12}>Finance</MenuItem>
-          <MenuItem value={13}>Uncategorized</MenuItem>
+          <MenuItem value={6}>Restaurants & Dining</MenuItem>
+          <MenuItem value={7}>Shopping & Entertainment</MenuItem>
+          <MenuItem value={8}>Travel</MenuItem>
+          <MenuItem value={9}>Cash, Checks, & Misc.</MenuItem>
+          <MenuItem value={10}>Giving</MenuItem>
+          <MenuItem value={11}>Business Expenses</MenuItem>
+          <MenuItem value={12}>Education</MenuItem>
+          <MenuItem value={13}>Finance</MenuItem>
+          <MenuItem value={14}>Uncategorized</MenuItem>
         </Select>
       </FormControl> 
 

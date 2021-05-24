@@ -141,7 +141,7 @@ function TransactionForm(props) {
           <MenuItem value={'RestaurantsAndDining'}>Restaurants & Dining</MenuItem>
           <MenuItem value={'ShoppingAndEntertainment'}>Shopping & Entertainment</MenuItem>
           <MenuItem value={'Travel'}>Travel</MenuItem>
-          <MenuItem value={'CashChecksAndMisc.'}>Cash, Checks, & Misc.</MenuItem>
+          <MenuItem value={'CashChecksAndMisc'}>Cash, Checks, & Misc.</MenuItem>
           <MenuItem value={'Giving'}>Giving</MenuItem>
           <MenuItem value={'BusinessExpenses'}>Business Expenses</MenuItem>
           <MenuItem value={'Education'}>Education</MenuItem>

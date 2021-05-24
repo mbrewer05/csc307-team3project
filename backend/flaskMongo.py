@@ -71,3 +71,12 @@ class Transaction(Model):
         for transaction in transactions:
             transaction["_id"] = str(transaction["_id"])
         return transactions
+    
+    def find_by_category(self, category):
+        transactions = list(self.collection.find({"category": category}))
+        for transaction in transactions:
+            transaction["_id"] = str(transaction["_id"])
+        return transactions  
+    
+    def find_by_category_spent(self, category, spent):
+        transactions = list(self.collection.find({"category": category, "spent": spent}))

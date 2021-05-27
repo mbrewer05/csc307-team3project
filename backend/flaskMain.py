@@ -83,9 +83,10 @@ def get_transaction(userID, transactionID):
             resp = jsonify(updatedTransaction), 201
             return resp
         elif request.method == 'DELETE':
-            transaction = User({"_id": transactionID})
+            transaction = Transaction({"_id": transactionID})
             if transaction.reload():
                 transaction.remove()
-            return jsonify({"error": "Transaction not found"}), 404
+            else:
+                return jsonify({"error": "Transaction not found"}), 404
         
     

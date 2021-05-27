@@ -40,15 +40,18 @@ function createData(date, desc, category, amount, balance) {
   return { date, desc, category, amount, balance};
 }
 
-const rows = [
-  createData('05/05/2021', 'Cali Fresh', 'Groceries', '-$36.49', '$3,409.16'),
-  createData('05/01/2021', 'May rent', 'Home & Utilities', '-$1,025.00', '$3,445.65'),
-  createData('04/26/2021', 'Amazon purchase', 'Shopping & Entertainment', '-$29.35', '$4,470.65'),
-  createData('04/25/2021', 'April paycheck', 'Cash, Checks, & Misc.', '$4,500.00', '$4,500.00'),
-];
+// const rows = [
+//   createData('05/05/2021', 'Cali Fresh', 'Groceries', '-$36.49', '$3,409.16'),
+//   createData('05/01/2021', 'May rent', 'Home & Utilities', '-$1,025.00', '$3,445.65'),
+//   createData('04/26/2021', 'Amazon purchase', 'Shopping & Entertainment', '-$29.35', '$4,470.65'),
+//   createData('04/25/2021', 'April paycheck', 'Cash, Checks, & Misc.', '$4,500.00', '$4,500.00'),
+// ];
 
-function TransactionTable() {
+function TransactionTable(props) {
   const classes = useStyles();
+  const rows = props.transactionData;
+  
+  console.log(rows)
 
   return (
     <TableContainer component={Paper}>
@@ -64,12 +67,12 @@ function TransactionTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, index) => (
             <StyledTableRow key={row.date}>
               <TableCell component="th" scope="row">
                 {row.date}
               </TableCell>
-              <TableCell>{row.desc}</TableCell>
+              <TableCell>{row.description}</TableCell>
               <TableCell>{row.category}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
               <TableCell align="right">{row.balance}</TableCell>
@@ -95,6 +98,7 @@ function TransactionTable() {
                   color="secondary"
                   variant="contained"
                   disableElevation
+                  onClick={() => props.removeTransaction(index)}
                 >
                       DELETE
                 </Button>

@@ -23,7 +23,7 @@ def get_users():
         return resp
         
         
-@app.route('/users/<userID>', methods=['GET', 'POST', 'DELETE'])
+@app.route('/users/<userID>', methods=['GET', 'POST', 'DELETE', 'PATCH'])
 def get_user(userID):
     if request.method == 'GET':
         user = User({"_id": userID})
@@ -42,6 +42,13 @@ def get_user(userID):
         if user.reload():
             user.remove()
         return jsonify({"error": "User not found"}), 404
+    elif request.method == 'PATCH':
+        user = User({"_id": ObjectId(userID)})
+        settingsToChange = request.get_json()
+        if user.reload():
+            user.patch(settingsToChange, userID)
+            return jsonify({"done": "nothing left"}), 355
+        return jsonify({"done": "nothing left"}), 255
         
         
 @app.route('/users/<userId>/transactions', methods=['GET', 'POST'])

@@ -96,3 +96,26 @@ class Transaction(Model):
         for transaction in transactions:
             transaction["_id"] = str(transaction["_id"])
         return transactions
+
+
+class RemainingBalance(Model):
+    load_dotenv()
+    MONGODB_URL = os.environ['MONGODB_URL']
+    db_client = pymongo.MongoClient(MONGODB_URL)
+    collection = db_client["budget_tracker"]["remaining_balance"]
+
+    def get_val(self):
+        remaining = list(self.collection.find())
+        for balance in remaining:
+            balance["_id"] = str(balance["_id"])
+        return remaining
+    
+    def add_to_balance(self, val):
+        remaining = self.collection.find_one()
+        remaining["balance"] += val
+        self.collection.update({}, remaining)
+
+    def sub_from_balance(self, val):
+        remaining = self.collection.find_one()
+        remaining["balance"] -= val
+        self.collection.update({}, remaining)

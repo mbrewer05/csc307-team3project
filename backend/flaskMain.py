@@ -1,3 +1,4 @@
+import re
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
@@ -89,11 +90,24 @@ def get_transaction(userID, transactionID):
             updatedTransaction.save()
             resp = jsonify(updatedTransaction), 201
             return resp
+
         elif request.method == 'DELETE':
             transaction = Transaction({"_id": transactionID})
             if transaction.reload():
                 transaction.remove()
             else:
                 return jsonify({"error": "Transaction not found"}), 404
-        
+
+@app.route('/users/<userID>/remainingBalance', methods=['GET', 'PATCH'])
+#Return remaining balance object from DB
+def get_remaining(userID):
+    if request.method == 'GET':
+        remainingBalance = list(RemainingBalance().get_val())
+        return remainingBalance[0]
     
+    if request.method == 'PATCH':
+        remaining = request.get_json()
+        if remaining["spent"] == "1":
+            RemainingBalance().sub_from_balance(remaining["amount"])
+        elif remaining["spent"] == "0":
+            RemainingBalance().add_to_balance(remaining["amount"])

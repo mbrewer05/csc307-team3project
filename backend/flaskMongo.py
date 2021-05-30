@@ -111,11 +111,11 @@ class RemainingBalance(Model):
         return remaining
     
     def add_to_balance(self, val):
-        remaining = self.collection.find_one()
-        remaining["balance"] += val
-        self.collection.update({}, remaining)
+        remaining = list(self.collection.find())
+        remaining[0]["balance"] += val
+        self.collection.update({"userID": "60a483f4cc4a814ce0cb4139"}, remaining[0])
 
     def sub_from_balance(self, val):
-        remaining = self.collection.find_one()
-        remaining["balance"] -= val
-        self.collection.update({}, remaining)
+        remaining = list(self.collection.find())
+        remaining[0]["balance"] -= val 
+        self.collection.update({"userID": "60a483f4cc4a814ce0cb4139"}, remaining[0])

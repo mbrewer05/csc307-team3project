@@ -26,19 +26,19 @@ function TransactionPage(){
         var resA = a.date.split("-");
         var resB = b.date.split("-");
         if (resA[0] < resB[0]) {
-            return -1;
+            return 1;
         }
         if (resA[0] > resB[0]) {
-            return 1;
+            return -1;
         }
         if (resA[1] < resB[1]) {
-            return -1;
-        }
-        if (resA[1] > resB[1]) {
             return 1;
         }
-        if (resA[2] < resB[2]) {
+        if (resA[1] > resB[1]) {
             return -1;
+        }
+        if (resA[2] < resB[2]) {
+            return 1;
         }
         if (resA[2] > resB[2]) {
             return -1;

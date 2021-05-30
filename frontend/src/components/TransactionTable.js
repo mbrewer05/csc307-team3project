@@ -62,7 +62,7 @@ function TransactionTable(props) {
             <StyledTableCell>Description</StyledTableCell>
             <StyledTableCell>Category</StyledTableCell>
             <StyledTableCell align="right">Amount</StyledTableCell>
-            <StyledTableCell align="right">Remaining Balance</StyledTableCell>
+            {/* <StyledTableCell align="right">Remaining Balance</StyledTableCell> */}
             <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -83,14 +83,14 @@ function TransactionTable(props) {
                 justify="center"
               >
                 &nbsp;
-                <Button
+                {/* <Button
                   id="button-edit"
                   color="inherit"
                   variant="contained"
                   disableElevation
                 >
                   Edit
-                </Button>
+                </Button> */}
                 &nbsp;
                 &nbsp;
                 <Button

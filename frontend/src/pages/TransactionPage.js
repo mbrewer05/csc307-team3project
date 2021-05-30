@@ -22,11 +22,34 @@ function TransactionPage(){
         });
         setTransactions(updated);
     };
+    function compareDates(a, b) {
+        var resA = a.date.split("-");
+        var resB = b.date.split("-");
+        if (resA[0] < resB[0]) {
+            return 1;
+        }
+        if (resA[0] > resB[0]) {
+            return -1;
+        }
+        if (resA[1] < resB[1]) {
+            return 1;
+        }
+        if (resA[1] > resB[1]) {
+            return -1;
+        }
+        if (resA[2] < resB[2]) {
+            return 1;
+        }
+        if (resA[2] > resB[2]) {
+            return -1;
+        }
+        return 0;
+    }
     
     function updateList(transaction) {
         makePostCall(transaction).then(result => {
             if(result)
-                setTransactions([...transactions, result.data]);
+                setTransactions([...transactions, result.data].sort(compareDates));
         });
     }
 
@@ -44,7 +67,8 @@ function TransactionPage(){
     async function fetchAll(){
         try {
             const response = await axios.get('http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions');
-            return response.data.transaction_list; 
+            const updated = response.data.transaction_list.sort(compareDates);
+            return updated;
         }
         catch (error){
             //We're not handling errors. Just logging into the console.

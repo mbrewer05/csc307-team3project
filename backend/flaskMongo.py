@@ -52,6 +52,19 @@ class User(Model):
         for user in users:
             user["_id"] = str(user["_id"])
         return users
+    
+    def patch(self, settingsToChange, id):
+        users = (self.collection.find_one({"_id": ObjectId(id)}))
+        if settingsToChange['user']['name'] != '':
+            users['name'] = settingsToChange['user']['name']
+        if settingsToChange['user']['username'] != '':
+            users['username'] = settingsToChange['user']['username']
+        if settingsToChange['user']['password'] != '':
+            users['password'] = settingsToChange['user']['password']
+        if settingsToChange['user']['budget'] != '':
+            users['budget'] = settingsToChange['user']['budget']
+        self.collection.update(
+            { "_id": ObjectId(self._id) }, users)
         
         
 class Transaction(Model):

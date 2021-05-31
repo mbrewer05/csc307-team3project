@@ -1,6 +1,7 @@
 import React from "react";
 import Appbar from "../components/Appbar.js";
 import TransactionForm from "../components/TransactionForm.js";
+import RemainingBalance from"../components/RemainingBalance.js";
 import TransactionTable from "../components/TransactionTable.js";
 import Grid from "@material-ui/core/Grid";
 
@@ -93,6 +94,7 @@ function TransactionPage() {
                     const responsePatchTwo = responses[1];
                 })
             );
+            
             // const response = await axios.post('http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions', transaction);
             // const response = await axios.patch(
             //     "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/remainingBalance",
@@ -109,9 +111,9 @@ function TransactionPage() {
         try {
             const response = await axios.get(
                 "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions"
-            );
+            )
             const updated = response.data.transaction_list.sort(compareDates);
-            return updated;
+            return updated
         } catch (error) {
             //We're not handling errors. Just logging into the console.
             console.log(error);
@@ -143,6 +145,14 @@ function TransactionPage() {
                 <TransactionForm handleSubmit={updateList} />
             </Grid>
 
+            <Grid
+                container
+                direction="row"
+                justify="flex-end"
+                alignItems="right"
+            >
+                <RemainingBalance />
+            </Grid>
             <Grid
                 container
                 direction="row"

@@ -10,12 +10,31 @@ function TransactionPage() {
 
     async function removeOneTransaction(index) {
         const _id = transactions[index]["_id"];
+        const transaction = await axios.get("http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions/".concat(
+            _id));
+
         try {
-            const response = await axios.delete(
+            let deleteOne =
                 "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions/".concat(
                     _id
-                )
+                );
+            let patchTwo =
+                "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/remainingBalance";
+
+            const requestDeleteOne = axios.delete(deleteOne);
+            const requestPatchTwo = axios.delete(patchTwo, transaction);
+
+            axios.all([requestDeleteOne, requestPatchTwo]).then(
+                axios.spread((...responses) => {
+                    const responseDeleteOne = responses[0];
+                    const responsePatchTwo = responses[1];
+                })
             );
+            // const response = await axios.delete(
+            //     "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions/".concat(
+            //         _id
+            //     )
+            // );
         } catch (error) {
             //We're not handling errors. Just logging into the console.
             console.log(error);

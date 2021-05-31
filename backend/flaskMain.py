@@ -95,19 +95,30 @@ def get_transaction(userID, transactionID):
             transaction = Transaction({"_id": transactionID})
             if transaction.reload():
                 transaction.remove()
+                return jsonify({"Success": "Transaction deleted"}), 202
             else:
                 return jsonify({"error": "Transaction not found"}), 404
 
-@app.route('/users/<userID>/remainingBalance', methods=['GET', 'PATCH'])
+@app.route('/users/<userID>/remainingBalance', methods=['GET', 'PATCH', 'DELETE'])
 #Return remaining balance object from DB
 def get_remaining(userID):
     if request.method == 'GET':
         remainingBalance = list(RemainingBalance().get_val())
         return remainingBalance[0]
     
-    if request.method == 'PATCH':
-        remaining = request.get_json()
-        if remaining["spent"] == "1":
-            RemainingBalance().sub_from_balance(remaining["amount"])
-        elif remaining["spent"] == "0":
-            RemainingBalance().add_to_balance(remaining["amount"])
+    elif request.method == 'PATCH':
+        transaction = request.get_json()
+        
+        if transaction["spent"] == "1":
+            RemainingBalance().sub_from_balance(transaction["amount"])
+        elif transaction["spent"] == "0":
+            RemainingBalance().add_to_balance(transaction["amount"])
+        return jsonify({"Success" : "balance updated"}), 900
+    
+    elif request.method == 'DELETE':
+        transaction = request.get_json()
+        if transaction["spent"] == "1":
+            RemainingBalance().add_to_balance(transaction["amount"])
+        elif transaction["spent"] == "0":
+            RemainingBalance().sub_from_balance(transaction["amount"])
+        return jsonify({"Success" : "balance updated"}), 800

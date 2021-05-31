@@ -3,6 +3,7 @@ from bson import ObjectId
 import dns
 import os
 from dotenv import load_dotenv
+from cryptography.fernet import Fernet
 
 class Model(dict):
     """
@@ -47,20 +48,31 @@ class User(Model):
             user["_id"] = str(user["_id"])
         return users
 
-    def find_by_userName(self, username):
+    def find_by_username(self, username):
         users = list(self.collection.find({"username": username}))
         for user in users:
             user["_id"] = str(user["_id"])
         return users
+        
+    def find_by_username_and_password(self, username, password):
+        fernet = Fernet(os.environ['FERNET_KEY'])
+        unfilteredUsers = list(self.collection.find({"username": username}))
+        filteredUsers = []
+        for user in unfilteredUsers:
+            user["_id"] = str(user["_id"])
+            if password == fernet.decrypt(user['password'].encode()):
+                filteredUsers.append(user)
+        return filteredUsers
     
     def patch(self, settingsToChange, id):
+        fernet = Fernet(os.environ['FERNET_KEY'])
         users = (self.collection.find_one({"_id": ObjectId(id)}))
         if settingsToChange['user']['name'] != '':
             users['name'] = settingsToChange['user']['name']
         if settingsToChange['user']['username'] != '':
             users['username'] = settingsToChange['user']['username']
         if settingsToChange['user']['password'] != '':
-            users['password'] = settingsToChange['user']['password']
+            users['password'] = fernet.encrypt(settingsToChange['user']['password'].encode())
         if settingsToChange['user']['budget'] != '':
             users['budget'] = settingsToChange['user']['budget']
         self.collection.update(

@@ -2,6 +2,7 @@ import ProfilePage from "./pages/ProfilePage.js"
 import TransactionPage from "./pages/TransactionPage.js"
 import SettingsPage from "./pages/SettingsPage.js"
 import StatsPage from "./pages/StatsPage.js"
+import LoginPage from "./pages/LoginPage.js"
 import "./App.css";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
@@ -11,7 +12,7 @@ function App() {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/">
-                        <TransactionPage />
+                        <LoginPage />
                     </Route>
                     <Route path="/profile">
                         <ProfilePage />

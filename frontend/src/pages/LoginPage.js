@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {blue} from '@material-ui/core/colors';
+import { useHistory } from "react-router-dom"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +37,54 @@ const useStyles = makeStyles((theme) => ({
 
 function LoginPage() {
 	const classes = useStyles();
+    const axios = require('axios');
+    const history = useHistory();
+    const [user, setUser] = useState({username: '', password: ''});
+    
+    function handleChange(event){
+        const {name, value} = event.target;
+        if (name === 'username'){
+            setUser({username: value, password: user['password']});
+        }
+        else if (name === 'password'){
+            setUser({username: user['username'], password: value});
+        }
+    }
+    
+    function submitForm(){
+        if(user['username'] && user['password']){
+            makePostCall().then(result => {
+                if (result){
+                    if(result.data.user_list.length){
+                        history.push("/transactions")
+                    }
+                    else{
+                        //error message
+                    }
+                }
+                else{
+                    //error message
+                }
+                setUser({username: user['username'], password: ''});
+            });
+        }
+        else {
+            //error message
+        }
+    }
+    
+    async function makePostCall(){
+        try {
+            const response = await axios.get('http://localhost:5000/users?'
+                                                .concat("username=").concat(user['username'])
+                                                .concat("&password=").concat(user['password']));
+            return response;
+        }
+        catch (error) {
+            console.log(error);
+            return false;
+        }
+    };
 
 	return (
 		<Container component="main" maxWidth="xs">
@@ -55,6 +104,8 @@ function LoginPage() {
 					id="username"
 					label="Enter username"
 					name="username"
+                    value={user.username}
+                    onChange={handleChange}
 				/>
 				<TextField
 					variant="outlined"
@@ -65,13 +116,16 @@ function LoginPage() {
 					label="Enter password"
 					name="password"
 					type="password"
+                    value={user.password}
+                    onChange={handleChange}
 				/>
 				<Button
-					type="submit"
+					//type="submit"
 					fullWidth
 					variant="contained"
 					color="primary"
 					className={classes.submit}
+                    onClick={() => submitForm()}
 				>
 					Sign In
 				</Button>

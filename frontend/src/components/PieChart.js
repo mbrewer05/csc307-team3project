@@ -111,6 +111,7 @@ function PieChart(){
                      "Business Expenses", "Education", "Finance",
                      "Uncategorized",],
             datasets: [{
+                label: "Amount",
                 data: [amts.HomeAndUtilities, amts.Transportation, amts.Groceries, 
                        amts.PersonalAndFamilyCare, amts.Health, amts.Insurance,
                        amts.RestaurantsAndDining, amts.ShoppingAndEntertainment,

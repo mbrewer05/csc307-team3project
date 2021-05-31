@@ -59,6 +59,8 @@ def get_transactions(userId):
         search_category = request.args.get('category') 
         search_spent = request.args.get('spent')
 
+        if search_spent and not search_category:
+            transactions = Transaction().find_by_spent(search_spent)
         if search_category and not search_spent:
             transactions = Transaction().find_by_category(search_category)
         if search_category and search_spent:

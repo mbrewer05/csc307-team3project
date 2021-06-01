@@ -108,3 +108,9 @@ class Transaction(Model):
         for transaction in transactions:
             transaction["_id"] = str(transaction["_id"])
         return transactions
+    
+    def find_by_spent(self, spent):
+        transactions = list(self.collection.find({"spent": spent}))
+        for transaction in transactions:
+            transaction["_id"] = str(transaction["_id"])
+        return transactions

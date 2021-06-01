@@ -4,23 +4,22 @@ import TransactionForm from "../components/TransactionForm.js";
 import RemainingBalance from"../components/RemainingBalance.js";
 import TransactionTable from "../components/TransactionTable.js";
 import Grid from "@material-ui/core/Grid";
+import {Redirect} from "react-router-dom";
 
-function TransactionPage() {
+function TransactionPage(props) {
     const [transactions, setTransactions] = React.useState([]);
     const axios = require("axios");
 
     async function removeOneTransaction(index) {
         const _id = transactions[index]["_id"];
-        const transaction = await axios.get("http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions/".concat(
+        const transaction = await axios.get("http://localhost:5000/users/" + localStorage.getItem("currentUser") + "/transactions/".concat(
             _id));
 
         try {
             let deleteOne =
-                "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions/".concat(
-                    _id
-                );
+                "http://localhost:5000/users/" + localStorage.getItem("currentUser") + "/transactions/".concat(_id);
             let patchTwo =
-                "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/remainingBalance";
+                "http://localhost:5000/users/" + localStorage.getItem("currentUser") + "/remainingBalance";
 
             const requestDeleteOne = axios.delete(deleteOne);
             const requestPatchTwo = axios.delete(patchTwo, transaction);
@@ -31,11 +30,6 @@ function TransactionPage() {
                     const responsePatchTwo = responses[1];
                 })
             );
-            // const response = await axios.delete(
-            //     "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions/".concat(
-            //         _id
-            //     )
-            // );
         } catch (error) {
             //We're not handling errors. Just logging into the console.
             console.log(error);
@@ -45,6 +39,7 @@ function TransactionPage() {
         });
         setTransactions(updated);
     }
+    
     function compareDates(a, b) {
         var resA = a.date.split("-");
         var resB = b.date.split("-");
@@ -81,9 +76,9 @@ function TransactionPage() {
     async function makePostCall(transaction) {
         try {
             let postOne =
-                "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions";
+                "http://localhost:5000/users/" + localStorage.getItem("currentUser") + "/transactions";
             let patchTwo =
-                "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/remainingBalance";
+                "http://localhost:5000/users/" + localStorage.getItem("currentUser") + "/remainingBalance";
 
             const requestPostOne = axios.post(postOne, transaction);
             const requestPatchTwo = axios.patch(patchTwo, transaction);
@@ -110,7 +105,7 @@ function TransactionPage() {
     async function fetchAll() {
         try {
             const response = await axios.get(
-                "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions"
+                "http://localhost:5000/users/" + localStorage.getItem("currentUser") + "/transactions"
             )
             const updated = response.data.transaction_list.sort(compareDates);
             return updated
@@ -133,39 +128,44 @@ function TransactionPage() {
         });
     }, []);
 
-    return (
-        <div className="transaction-page">
-            <Appbar />
-            <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="right"
-            >
-                <TransactionForm handleSubmit={updateList} />
-            </Grid>
+    if (localStorage.getItem('currentUser')) 
+    {
+        return(
+            <div className="transaction-page">
+                <Appbar curUser={props.curUser} setCurUser={props.setCurUser}/>
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="right"
+                >
+                    <TransactionForm handleSubmit={updateList} />
 
-            <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="right"
-            >
-                <RemainingBalance />
-            </Grid>
-            <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="right"
-            >
-                <TransactionTable
-                    transactionData={transactions}
-                    removeTransaction={removeOneTransaction}
-                />
-            </Grid>
-        </div>
-    );
+                </Grid> 
+
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="right"
+                >
+                    <RemainingBalance />
+                </Grid>
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="right" 
+                >
+                    <TransactionTable  transactionData={transactions} 
+                        removeTransaction={removeOneTransaction}/>
+                </Grid>
+            </div>
+        );
+    }
+    else {
+        return <Redirect to="/login" />
+    }
 }
 
 export default TransactionPage;

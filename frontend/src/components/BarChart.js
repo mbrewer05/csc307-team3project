@@ -77,7 +77,6 @@ function BarChart() {
         }
         return (axios.get('http://localhost:5000/users/' + userID + '/transactions?spent=1')
                 .then(response => {
-                    var amt = 0
                     const list = response.data.transaction_list
                     for (var i=0; i<list.length; i++){
                         updateMonthArr(year, list[i], months)
@@ -88,23 +87,8 @@ function BarChart() {
     }
 
     useEffect(() => {
-        var monthArr = {
-            January: 0,
-            February: 0,
-            March: 0,
-            April: 0,
-            May: 0,
-            June: 0,
-            July: 0,
-            August: 0,
-            September: 0,
-            October: 0,
-            November: 0,
-            December: 0
-        }
         getMonthSpending(year).then(result => {
-            monthArr = result
-            setAmts(monthArr)
+            setAmts(result)
             console.log("January: " + result)
         })
     }, [year])

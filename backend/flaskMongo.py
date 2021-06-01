@@ -46,12 +46,14 @@ class User(Model):
         users = list(self.collection.find())
         for user in users:
             user["_id"] = str(user["_id"])
+            user["password"] = str(user["password"])
         return users
 
     def find_by_username(self, username):
         users = list(self.collection.find({"username": username}))
         for user in users:
             user["_id"] = str(user["_id"])
+            user["password"] = str(user["password"])
         return users
         
     def find_by_username_and_password(self, username, password):
@@ -60,8 +62,9 @@ class User(Model):
         filteredUsers = []
         for user in unfilteredUsers:
             user["_id"] = str(user["_id"])
-            if password == fernet.decrypt(user['password'].encode()):
+            if password == fernet.decrypt(bytes(user['password'], 'utf-8')).decode():
                 filteredUsers.append(user)
+            user["password"] = str(user["password"])
         return filteredUsers
     
     def patch(self, settingsToChange, id):
@@ -72,7 +75,7 @@ class User(Model):
         if settingsToChange['user']['username'] != '':
             users['username'] = settingsToChange['user']['username']
         if settingsToChange['user']['password'] != '':
-            users['password'] = fernet.encrypt(settingsToChange['user']['password'].encode())
+            users['password'] = fernet.encrypt(settingsToChange['user']['password']).decode()
         if settingsToChange['user']['budget'] != '':
             users['budget'] = settingsToChange['user']['budget']
         self.collection.update(

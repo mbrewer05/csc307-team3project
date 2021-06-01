@@ -25,20 +25,15 @@ def get_users():
         else:
             users = User().find_all()
         return {"user_list": users}
-    
     elif request.method == 'POST':
         userToAdd = request.get_json()
         newUser = User(userToAdd)
-        newUser['password'] = fernet.encrypt(newUser['password'].encode())
+        newUser['password'] = fernet.encrypt(bytes(newUser['password'], 'utf-8')).decode()
         checkUsernameList = User().find_by_username(newUser['username'])
-
         if len(checkUsernameList):
             return jsonify({"error": "Username already exists"}), 409
         else:
             newUser.save()
-            newRemainingBalance = RemainingBalance({"userID": newUser["_id"], "balance": 0})
-            newRemainingBalance.save()
-
             resp = jsonify(newUser), 201
             return resp
         
@@ -56,7 +51,6 @@ def get_user(userID):
         if user.reload():
             user.remove()
         return jsonify({"error": "User not found"}), 404
-
     elif request.method == 'PATCH':
         user = User({"_id": ObjectId(userID)})
         settingsToChange = request.get_json()
@@ -103,7 +97,6 @@ def get_transaction(userID, transactionID):
             updatedTransaction.save()
             resp = jsonify(updatedTransaction), 201
             return resp
-
         elif request.method == 'DELETE':
             transaction = Transaction({"_id": transactionID})
             if transaction.reload():

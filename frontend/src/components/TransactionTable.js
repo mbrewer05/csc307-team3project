@@ -40,13 +40,6 @@ function createData(date, desc, category, amount, balance) {
   return { date, desc, category, amount, balance};
 }
 
-// const rows = [
-//   createData('05/05/2021', 'Cali Fresh', 'Groceries', '-$36.49', '$3,409.16'),
-//   createData('05/01/2021', 'May rent', 'Home & Utilities', '-$1,025.00', '$3,445.65'),
-//   createData('04/26/2021', 'Amazon purchase', 'Shopping & Entertainment', '-$29.35', '$4,470.65'),
-//   createData('04/25/2021', 'April paycheck', 'Cash, Checks, & Misc.', '$4,500.00', '$4,500.00'),
-// ];
-
 function TransactionTable(props) {
   const classes = useStyles();
   const rows = props.transactionData;

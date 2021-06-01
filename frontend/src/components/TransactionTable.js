@@ -43,8 +43,6 @@ function createData(date, desc, category, amount, balance) {
 function TransactionTable(props) {
   const classes = useStyles();
   const rows = props.transactionData;
-  
-  console.log(rows)
 
   return (
     <TableContainer component={Paper}>

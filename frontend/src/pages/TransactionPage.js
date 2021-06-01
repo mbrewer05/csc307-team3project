@@ -3,15 +3,19 @@ import Appbar from '../components/Appbar.js';
 import TransactionForm from '../components/TransactionForm.js';
 import TransactionTable from '../components/TransactionTable.js';
 import Grid from '@material-ui/core/Grid';
+import { Redirect } from "react-router-dom";
 
-function TransactionPage(){
+function TransactionPage(props){
     const [transactions, setTransactions] = React.useState([]);
     const axios = require('axios');
     
     async function removeOneTransaction (index) {
         const _id = transactions[index]['_id']
         try{
-            const response = await axios.delete('http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions/'.concat(_id));
+            const response = await axios.delete('http://localhost:5000/users/'
+                                                + props.curUser
+                                                + "/transactions/"
+                                                + _id);
         }
         catch(error){
             //We're not handling errors. Just logging into the console.
@@ -55,7 +59,7 @@ function TransactionPage(){
 
     async function makePostCall(transaction) {
         try {
-            const response = await axios.post('http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions', transaction);
+            const response = await axios.post('http://localhost:5000/users/' + localStorage.getItem('currentUser') +'/transactions', transaction);
             return response;
         }
         catch(error) {
@@ -66,7 +70,7 @@ function TransactionPage(){
     
     async function fetchAll(){
         try {
-            const response = await axios.get('http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions');
+            const response = await axios.get('http://localhost:5000/users/' + localStorage.getItem('currentUser') + '/transactions');
             const updated = response.data.transaction_list.sort(compareDates);
             return updated;
         }
@@ -84,30 +88,36 @@ function TransactionPage(){
         });
     }, [] );
 
-    return(
-        <div className="transaction-page">
-            <Appbar />
-            <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="right"
-            >
-            <TransactionForm handleSubmit={updateList} />
+    if (localStorage.getItem('currentUser')) 
+    {
+        return(
+            <div className="transaction-page">
+                <Appbar curUser={props.curUser} setCurUser={props.setCurUser}/>
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="right"
+                >
+                <TransactionForm handleSubmit={updateList} />
 
-            </Grid> 
+                </Grid> 
 
-            <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="right" 
-            >
-                <TransactionTable  transactionData={transactions} 
-                    removeTransaction={removeOneTransaction}/>
-            </Grid>
-        </div>
-    );
+                <Grid
+                    container
+                    direction="row"
+                    justify="flex-end"
+                    alignItems="right" 
+                >
+                    <TransactionTable  transactionData={transactions} 
+                        removeTransaction={removeOneTransaction}/>
+                </Grid>
+            </div>
+        );
+    }
+    else {
+        return <Redirect to="/login" />
+    }
 }
 
 export default TransactionPage;

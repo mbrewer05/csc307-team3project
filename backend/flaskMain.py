@@ -28,7 +28,7 @@ def get_users():
     elif request.method == 'POST':
         userToAdd = request.get_json()
         newUser = User(userToAdd)
-        newUser['password'] = fernet.encrypt(newUser['password'].encode())
+        newUser['password'] = fernet.encrypt(bytes(newUser['password'], 'utf-8')).decode()
         checkUsernameList = User().find_by_username(newUser['username'])
         if len(checkUsernameList):
             return jsonify({"error": "Username already exists"}), 409

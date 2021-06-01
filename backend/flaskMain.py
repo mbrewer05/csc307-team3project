@@ -2,28 +2,43 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
 from flaskMongo import *
+import os
+from dotenv import load_dotenv
+from cryptography.fernet import Fernet
 
 app = Flask(__name__)
 CORS(app)
+
+load_dotenv()
+fernetKey = os.environ['FERNET_KEY']
+fernet = Fernet(fernetKey)
 
 @app.route('/users', methods=['GET', 'POST'])
 def get_users():
     if request.method == 'GET':
         search_username = request.args.get('username')
-        if search_username:
-            users = User().find_by_name(search_username)
+        search_password = request.args.get('password')
+        if search_username and search_password:
+            users = User().find_by_username_and_password(search_username, search_password)
+        elif search_username:
+            users = User().find_by_username(search_username)
         else:
             users = User().find_all()
         return {"user_list": users}
     elif request.method == 'POST':
         userToAdd = request.get_json()
         newUser = User(userToAdd)
-        newUser.save()
-        resp = jsonify(newUser), 201
-        return resp
+        newUser['password'] = fernet.encrypt(newUser['password'].encode())
+        checkUsernameList = User().find_by_username(newUser['username'])
+        if len(checkUsernameList):
+            return jsonify({"error": "Username already exists"}), 409
+        else:
+            newUser.save()
+            resp = jsonify(newUser), 201
+            return resp
         
         
-@app.route('/users/<userID>', methods=['GET', 'POST', 'DELETE', 'PATCH'])
+@app.route('/users/<userID>', methods=['GET', 'DELETE', 'PATCH'])
 def get_user(userID):
     if request.method == 'GET':
         user = User({"_id": userID})
@@ -31,12 +46,6 @@ def get_user(userID):
             return user
         else:
             return jsonify({"error": "User not found"}), 404
-    elif request.method == 'POST':
-        userToUpdate = request.get_json()
-        updatedUser = User(userToUpdate)
-        updatedUser.save()
-        resp = jsonify(updatedUser), 201
-        return resp
     elif request.method == 'DELETE':
         user = User({"_id": userID})
         if user.reload():
@@ -53,18 +62,15 @@ def get_user(userID):
         
 @app.route('/users/<userId>/transactions', methods=['GET', 'POST'])
 def get_transactions(userId):
-    if request.method == 'GET':
-        transactions = Transaction().find_by_user(userId)
-        
+    if request.method == 'GET':        
         search_category = request.args.get('category') 
         search_spent = request.args.get('spent')
-
-        if search_spent and not search_category:
-            transactions = Transaction().find_by_spent(search_spent)
-        if search_category and not search_spent:
-            transactions = Transaction().find_by_category(search_category)
         if search_category and search_spent:
-            transactions = Transaction().find_by_category_spent(search_category, search_spent)
+            transactions = Transaction().find_by_category_spent(userId, search_category, search_spent)
+        elif search_category:
+            transactions = Transaction().find_by_category(userId, search_category)
+        else:
+            transactions = Transaction().find_by_user(userId)
         return {"transaction_list": transactions}
 
     elif request.method == 'POST':

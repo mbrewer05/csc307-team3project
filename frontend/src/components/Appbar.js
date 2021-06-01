@@ -8,7 +8,7 @@ import { Typography } from "@material-ui/core";
 import { Button } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import DirectionsRun from "@material-ui/icons/DirectionsRun"
-
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,8 +19,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Appbar() {
+function Appbar(props) {
     const classes = useStyles();
+    const history = useHistory();
+    
+    function logoutUser(){
+        props.setCurUser("")
+        localStorage.removeItem('currentUser');
+        history.push("/login");
+    }
+    
     return (
         <div className={classes.root}>
             <AppBar position="static" color="primary">
@@ -52,6 +60,7 @@ function Appbar() {
                             variant="contained"
                             startIcon={<DirectionsRun />}
                             disableElevation
+                            onClick={() => logoutUser()}
                         >
                             LOG OUT
                         </Button>

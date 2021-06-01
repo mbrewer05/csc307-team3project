@@ -18,40 +18,40 @@ function BarChart() {
         var val = transaction.date.split("-");
         if (Number(val[0]) == year) {
             switch (Number(val[1])) {
-                case 0:
+                case 1:
                     months["January"] += transaction.amount;
                     break;
-                case 1:
+                case 2:
                     months["February"] += transaction.amount;
                     break;
-                case 2:
+                case 3:
                     months["March"] += transaction.amount;
                     break;
-                case 3:
+                case 4:
                     months["April"] += transaction.amount;
                     break;   
-                case 4:
+                case 5:
                     months["May"] += transaction.amount;
                     break;
-                case 5:
+                case 6:
                     months["June"] += transaction.amount;
                     break;
-                case 6:
+                case 7:
                     months["July"] += transaction.amount;
                     break;
-                case 7:
+                case 8:
                     months["August"] += transaction.amount;
                     break;
-                case 8:
+                case 9:
                     months["September"] += transaction.amount;
                     break;
-                case 9:
+                case 10:
                     months["October"] += transaction.amount;
                     break;
-                case 10:
+                case 11:
                     months["November"] += transaction.amount;
                     break;
-                case 11:
+                case 12:
                     months["December"] += transaction.amount;
                     break;
                 default:

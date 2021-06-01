@@ -14,36 +14,75 @@ function BarChart() {
     const [amts, setAmts] = useState([]);
     const [year, setYear] = useState(2021);
 
-    function addYear() {
-        setYear(year + 1);
-    }
-
-    function subYear() {
-        setYear(year - 1);
-    }
-
-    function filter_by_date(list, month, year) {
-        var updated = [];
-        var res;
-        for (var i=0; i<list.length; i++) {
-            res = list[i].date.split("-");
-            if (Number(res[0]) == year && Number(res[1]) == month) {
-                updated.push(list[i]);
+    function updateMonthArr(year, transaction, months) {
+        var val = transaction.date.split("-");
+        if (Number(val[0]) == year) {
+            switch (Number(val[1])) {
+                case 0:
+                    months["January"] += transaction.amount;
+                    break;
+                case 1:
+                    months["February"] += transaction.amount;
+                    break;
+                case 2:
+                    months["March"] += transaction.amount;
+                    break;
+                case 3:
+                    months["April"] += transaction.amount;
+                    break;   
+                case 4:
+                    months["May"] += transaction.amount;
+                    break;
+                case 5:
+                    months["June"] += transaction.amount;
+                    break;
+                case 6:
+                    months["July"] += transaction.amount;
+                    break;
+                case 7:
+                    months["August"] += transaction.amount;
+                    break;
+                case 8:
+                    months["September"] += transaction.amount;
+                    break;
+                case 9:
+                    months["October"] += transaction.amount;
+                    break;
+                case 10:
+                    months["November"] += transaction.amount;
+                    break;
+                case 11:
+                    months["December"] += transaction.amount;
+                    break;
+                default:
+                    break;
             }
         }
-        return updated;
     }
 
-    async function getMonthSpending(month, year) {
+    async function getMonthSpending(year) {
+        var months = {
+            January: 0,
+            February: 0,
+            March: 0,
+            April: 0,
+            May: 0,
+            June: 0,
+            July: 0,
+            August: 0,
+            September: 0,
+            October: 0,
+            November: 0,
+            December: 0
+        }
         return (axios.get('http://localhost:5000/users/' + userID + '/transactions?spent=1')
                 .then(response => {
                     var amt = 0
                     const list = response.data.transaction_list
-                    const updated = filter_by_date(list, month, year)
-                    for (var i=0; i<updated.length; i++){
-                        amt += updated[i].amount
+                    for (var i=0; i<list.length; i++){
+                        updateMonthArr(year, list[i], months)
                     }
-                    return amt
+                    return months
                 })
         )
     }
@@ -63,56 +102,12 @@ function BarChart() {
             November: 0,
             December: 0
         }
-        getMonthSpending(0, year).then(result => {
-            monthArr["January"] = result
+        getMonthSpending(year).then(result => {
+            monthArr = result
+            setAmts(monthArr)
             console.log("January: " + result)
         })
-        getMonthSpending(1, year).then(result => {
-            monthArr["February"] = result
-            console.log("February: " + result)
-        })
-        getMonthSpending(2, year).then(result => {
-            monthArr["March"] = result
-            console.log("March: " + result)
-        })
-        getMonthSpending(3, year).then(result => {
-            monthArr["April"] = result
-            console.log("April: " + result)
-        })
-        getMonthSpending(4, year).then(result => {
-            monthArr["May"] = result
-            console.log("May: " + result)
-        })
-        getMonthSpending(5, year).then(result => {
-            monthArr["June"] = result
-            console.log("June: " + result)
-        })
-        getMonthSpending(6, year).then(result => {
-            monthArr["July"] = result
-            console.log("July: " + result)
-        })
-        getMonthSpending(7, year).then(result => {
-            monthArr["August"] = result
-            console.log("August: " + result)
-        })
-        getMonthSpending(8, year).then(result => {
-            monthArr["September"] = result
-            console.log("September: " + result)
-        })
-        getMonthSpending(9, year).then(result => {
-            monthArr["October"] = result
-            console.log("October: " + result)
-        })
-        getMonthSpending(10, year).then(result => {
-            monthArr["November"] = result
-            console.log("November: " + result)
-        })
-        getMonthSpending(11, year).then(result => {
-            monthArr["December"] = result
-            setAmts(monthArr)
-            console.log("December: " + result)
-        })
-    })
+    }, [year])
 
     var state = {
         dataBar: {
@@ -153,14 +148,13 @@ function BarChart() {
             <h3 className="mt-5">Total Spendings By Month ({year})</h3>
             <Bar data={state.dataBar} options={state.dataBarOptions} />
         </MDBContainer>
-        <IconButton color="primary" onClick={subYear}>
+        <IconButton color="primary" onClick={() => setYear(year - 1)}>
             <KeyboardArrowLeftIcon />
         </IconButton>
-        <IconButton color="primary" onClick={addYear}>
+        <IconButton color="primary" onClick={() => setYear(year + 1)}>
             <KeyboardArrowRightIcon />
         </IconButton>
         </div>
-
     )
 }
 

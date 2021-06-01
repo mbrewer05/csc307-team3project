@@ -39,6 +39,7 @@ function CreateAccPage() {
     const axios = require('axios');
     const history = useHistory();
     const [newUser, setNewUser] = React.useState({name:'', username:'', password:'', budget:0});
+    const [error, setError] = React.useState('');
     
     function handleChange(event){
         const {name, value} = event.target;
@@ -59,22 +60,14 @@ function CreateAccPage() {
     function submitForm(){
         if(newUser['name'] && newUser['username'] && newUser['password']){
             makePostCall().then(result => {
-                if (result){
-                    if(result.status == 201){
-                        setNewUser({name:'', username:'', password:'', budget:0});
-                        history.push("/login");
-                    }
-                    else {
-                        //error message
-                    }
-                }
-                else{
-                    //error message
+                if(result.status == 201){
+                    setNewUser({name:'', username:'', password:'', budget:0});
+                    history.push("/login");
                 }
             });
         }
         else {
-            //error message
+            setError("error: missing fields");
         }
     }
     
@@ -85,6 +78,17 @@ function CreateAccPage() {
         }
         catch (error) {
             console.log(error);
+            if (error.response){
+                if( error.response.status == 409){
+                    setError("error: username taken");
+                }
+                else{
+                    setError("error: server side error");
+                }
+            }
+            else{
+                setError("error: cannot connect to server");
+            }
             return false;
         }
     };
@@ -134,6 +138,9 @@ function CreateAccPage() {
                     value={newUser.password}
                     onChange={handleChange}
 				/>
+                <Typography component="h1" variant="subtitle1" color="secondary">
+                    {error}
+    			</Typography>
 				<Button
 					fullWidth
 					variant="contained"

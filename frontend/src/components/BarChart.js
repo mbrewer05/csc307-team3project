@@ -4,14 +4,23 @@ import { MDBContainer } from "mdbreact";
 import axios from "axios";
 import {red, orange, yellow, green, blue, purple, deepPurple, 
     pink, lightBlue, cyan, teal, lightGreen} from '@material-ui/core/colors';
-import Button from '@material-ui/core/Button';
-
+import IconButton from '@material-ui/core/IconButton';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 
 const userID = "60a483f4cc4a814ce0cb4139";
-const year = 2021;
 
 function BarChart() {
     const [amts, setAmts] = useState([]);
+    const [year, setYear] = useState(2021);
+
+    function addYear() {
+        setYear(year + 1);
+    }
+
+    function subYear() {
+        setYear(year - 1);
+    }
 
     function filter_by_date(list, month, year) {
         var updated = [];
@@ -139,10 +148,19 @@ function BarChart() {
     }
 
     return (
+        <div>
         <MDBContainer>
             <h3 className="mt-5">Total Spendings By Month ({year})</h3>
             <Bar data={state.dataBar} options={state.dataBarOptions} />
         </MDBContainer>
+        <IconButton color="primary" onClick={subYear}>
+            <KeyboardArrowLeftIcon />
+        </IconButton>
+        <IconButton color="primary" onClick={addYear}>
+            <KeyboardArrowRightIcon />
+        </IconButton>
+        </div>
+
     )
 }
 

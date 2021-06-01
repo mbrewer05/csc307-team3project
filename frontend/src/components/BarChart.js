@@ -8,9 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 
-const userID = "60a483f4cc4a814ce0cb4139";
-
-function BarChart() {
+function BarChart(props) {
     const [amts, setAmts] = useState([]);
     const [year, setYear] = useState(2021);
 
@@ -75,7 +73,7 @@ function BarChart() {
             November: 0,
             December: 0
         }
-        return (axios.get('http://localhost:5000/users/' + userID + '/transactions?spent=1')
+        return (axios.get('http://localhost:5000/users/' + localStorage.getItem('currentUser') + '/transactions?spent=1')
                 .then(response => {
                     const list = response.data.transaction_list
                     for (var i=0; i<list.length; i++){

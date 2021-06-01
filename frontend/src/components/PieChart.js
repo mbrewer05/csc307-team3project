@@ -3,13 +3,11 @@ import { Doughnut } from "react-chartjs-2";
 import { MDBContainer } from "mdbreact";
 import axios from "axios";
 
-const userID = "60a483f4cc4a814ce0cb4139";
-
-function PieChart(){
+function PieChart(props){
     const [amts, setAmts] = useState([])
     
     async function getCatSpending(category, catArr){
-        return axios.get('http://localhost:5000/users/' + userID + '/transactions?category=' + category +'&spent=1')
+        return axios.get('http://localhost:5000/users/' + localStorage.getItem('currentUser') + '/transactions?category=' + category +'&spent=1')
                 .then(response => {
                     var amt = 0
                     const list = response.data.transaction_list

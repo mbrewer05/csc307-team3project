@@ -9,7 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {blue} from '@material-ui/core/colors';
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function LoginPage() {
+function LoginPage(props) {
 	const classes = useStyles();
     const axios = require('axios');
     const history = useHistory();
@@ -53,10 +54,12 @@ function LoginPage() {
     
     function submitForm(){
         if(user['username'] && user['password']){
-            makePostCall().then(result => {
+            makeGetCall().then(result => {
                 if (result){
                     if(result.data.user_list.length){
-                        history.push("/transactions")
+                        props.setCurUser(result.data.user_list[0]._id);
+                        localStorage.setItem('currentUser', result.data.user_list[0]._id);
+                        history.push("/transactions");
                     }
                     else{
                         //error message
@@ -73,7 +76,7 @@ function LoginPage() {
         }
     }
     
-    async function makePostCall(){
+    async function makeGetCall(){
         try {
             const response = await axios.get('http://localhost:5000/users?'
                                                 .concat("username=").concat(user['username'])
@@ -85,59 +88,63 @@ function LoginPage() {
             return false;
         }
     };
-
-	return (
-		<Container component="main" maxWidth="xs">
-		<div className={classes.paper}>
-			<Avatar className={classes.avatar} variant="rounded">
-				<LockOutlinedIcon />
-			</Avatar>
-			<Typography component="h1" variant="h5">
-				Sign In
-			</Typography>
-			<form className={classes.form} noValidate>
-				<TextField
-					variant="outlined"
-					margin="normal"
-					required
-					fullWidth
-					id="username"
-					label="Enter username"
-					name="username"
-                    value={user.username}
-                    onChange={handleChange}
-				/>
-				<TextField
-					variant="outlined"
-					margin="normal"
-					required
-					fullWidth
-					id="password"
-					label="Enter password"
-					name="password"
-					type="password"
-                    value={user.password}
-                    onChange={handleChange}
-				/>
-				<Button
-					//type="submit"
-					fullWidth
-					variant="contained"
-					color="primary"
-					className={classes.submit}
-                    onClick={() => submitForm()}
-				>
-					Sign In
-				</Button>
-				<Grid item>
-					<Link href="signup" variant="body2">
-						{"New to Budget Planner? Create an Account Here"}
-					</Link>
-				</Grid>
-			</form>
-		</div>
-		</Container>
-	)
+    if (localStorage.getItem('currentUser')) 
+    {
+        return <Redirect to="/transactions" />
+    }
+    else{
+    	return (
+    		<Container component="main" maxWidth="xs">
+    		<div className={classes.paper}>
+    			<Avatar className={classes.avatar} variant="rounded">
+    				<LockOutlinedIcon />
+    			</Avatar>
+    			<Typography component="h1" variant="h5">
+    				Sign In
+    			</Typography>
+    			<form className={classes.form} noValidate>
+    				<TextField
+    					variant="outlined"
+    					margin="normal"
+    					required
+    					fullWidth
+    					id="username"
+    					label="Enter username"
+    					name="username"
+                        value={user.username}
+                        onChange={handleChange}
+    				/>
+    				<TextField
+    					variant="outlined"
+    					margin="normal"
+    					required
+    					fullWidth
+    					id="password"
+    					label="Enter password"
+    					name="password"
+    					type="password"
+                        value={user.password}
+                        onChange={handleChange}
+    				/>
+    				<Button
+    					fullWidth
+    					variant="contained"
+    					color="primary"
+    					className={classes.submit}
+                        onClick={() => submitForm()}
+    				>
+    					Sign In
+    				</Button>
+    				<Grid item>
+    					<Link href="signup" variant="body2">
+    						{"New to Budget Planner? Create an Account Here"}
+    					</Link>
+    				</Grid>
+    			</form>
+    		</div>
+    		</Container>
+    	)
+    }
 }
 
 export default LoginPage;

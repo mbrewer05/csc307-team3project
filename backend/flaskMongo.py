@@ -65,8 +65,8 @@ class User(Model):
         for user in unfilteredUsers:
             user["_id"] = str(user["_id"])
             if password == fernet.decrypt(bytes(user['password'], 'utf-8')).decode():
+                user["password"] = 'restricted'
                 filteredUsers.append(user)
-            user["password"] = str(user["password"])
         return filteredUsers
     
     def patch(self, settingsToChange, id):

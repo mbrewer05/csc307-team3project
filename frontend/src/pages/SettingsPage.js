@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SettingsPage(props) {
   const classes = useStyles();
-  const [user, setSettings] = React.useState({name: '', username: '', password: '', budget: '', timeInterval: -1, spendingAlter: false});
+  const [user, setSettings] = React.useState({name: '', username: '', password: ''});
   const axios = require('axios');
 
   async function submitSettingsForm() {
@@ -45,21 +45,6 @@ function SettingsPage(props) {
       setSettings(
         {name: user['name'], username: user['username'], password: event.target.value, 
         budget: user['budget'], timeInterval: user['description'], spendingAlter: user['spendingAlter']});
-    }
-    else if (event.target.name === "budget") {
-      setSettings(
-        {name: user['name'], username: user['username'], password: user['password'], 
-        budget: (event.target.value), timeInterval: user['description'], spendingAlter: user['spendingAlter']});
-    }
-    else if (event.target.name === "timeInterval") { 
-      setSettings(
-        {name: user['name'], username: user['username'], password: user['password'], 
-        budget: user['budget'], timeInterval: parseInt(event.target.value), spendingAlter: user['spendingAlter']});
-    }
-    else if (event.target.name === "SpendingAlter") {
-      setSettings(
-        {name: user['name'], username: user['username'], password: user['password'], 
-        budget: user['budget'], timeInterval: user['description'], spendingAlter: event.target.value});
     }
   }
   if (localStorage.getItem('currentUser')) 
@@ -126,76 +111,6 @@ function SettingsPage(props) {
             </br>
             <br>
             </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-            <br>
-            </br>
-          </div>
-          <div>
-            <Typography variant = "h3" align="left">
-              Change Spending Limit:
-              <TextField
-                id="filled-multiline-flexible"
-                label="New Spending Limit"
-                name = "budget"
-                type = "budget"
-                multiline
-                rowsMax={4}
-                onChange={handleChange}
-                variant="filled"
-              />
-            </Typography>
-          </div>
-          <div>
-            <Typography variant = "h3" align="left">
-              Change Time Interval:
-              <TextField
-                id="filled-multiline-flexible"
-                label="New Time Interval"
-                name = "timeInterval"
-                type = "timeInterval"
-                multiline
-                rowsMax={4}
-                onChange={handleChange}
-                variant="filled"
-              />
-            </Typography>
-          </div>
-          <div>
-              <br>
-              </br>
-              <br>
-              </br>
-              <br>
-              </br>
-              <br>
-              </br>
-              <br>
-              </br>
-          </div>
-          <div>
-            <Typography variant = "h3" align="left">
-              Alert When going over spending limit? 
-              <Checkbox inputProps={{ 'aria-label': 'uncontrolled-checkbox' }} />
-            </Typography>
           </div>
           <div>
               <br>

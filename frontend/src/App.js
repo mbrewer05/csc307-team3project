@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import ProfilePage from "./pages/ProfilePage.js"
 import TransactionPage from "./pages/TransactionPage.js"
 import SettingsPage from "./pages/SettingsPage.js"
 import StatsPage from "./pages/StatsPage.js"
@@ -33,10 +32,6 @@ function App() {
                     
                     <Route path="/signup">
                         <CreateAccPage curUser={currentUser} setCurUser={setCurrentUser}/>
-                    </Route>
-                    
-                    <Route path="/profile">
-                        <ProfilePage curUser={currentUser} setCurUser={setCurrentUser}/>
                     </Route>
 
                     <Route path="/transactions">

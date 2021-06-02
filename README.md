@@ -2,7 +2,7 @@
 
 # Project Description
 
-This project is a web based budget tracker application. When accessing the web page users can create an account or login with a existing one. Once logged in, the main page users will be working with is the transactions page. This page is where new budget transactions are displayed and created. Users can create new transactions, see and delete old ones, and view their balance in the form of a remaining budget. Users can also view the statistic pages which gives them statistics on their transactions. This pages presents both a pie chart showing user spending in each of their catagories and a graph that shows their spending month by month. Finally there is a settings pages where users can change their settings and button for them to logout.
+This project is a web-based budget tracker application. When accessing the web page users can create an account or login with a existing one. Once logged in, the main page users will be working with is the Transactions page. This page is where new transactions are displayed and created. Users can create new transactions, see abd delete old ones, and view their balance in the form of a remaining budget. Users can also view the Statistics page which gives them statistics on their spending. This page presents both a pie chart showing user spending in each of their categories, and a graph that shows their monthly spending. There is a Settings page that lets the user change their name, username, and password. Finally, there is a Log Out button that lets the user log out of their account.
 
 ## [UI Prototype](https://www.figma.com/file/IanX4UMOULQUXCnjJ5jdJN/CSC307-UI-prototype?node-id=0%3A1)
 

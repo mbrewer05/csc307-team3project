@@ -2,7 +2,6 @@ language: python
 install:
   - pip uninstall bson
   - pip install pymongo
-  - pip install bson
   - pip install dnspython
   - pip install python-dotenv
   - pip install pytest-dotenv

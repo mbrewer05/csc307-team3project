@@ -1,11 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import ProfilePage from "./pages/ProfilePage.js"
 import TransactionPage from "./pages/TransactionPage.js"
 import SettingsPage from "./pages/SettingsPage.js"
 import StatsPage from "./pages/StatsPage.js"
 import LoginPage from "./pages/LoginPage.js"
 import CreateAccPage from "./pages/CreateAccPage.js"
-import LoadingPage from "./pages/LoadingPage.js"
 import "./App.css";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
@@ -33,10 +31,6 @@ function App() {
                     
                     <Route path="/signup">
                         <CreateAccPage curUser={currentUser} setCurUser={setCurrentUser}/>
-                    </Route>
-                    
-                    <Route path="/profile">
-                        <ProfilePage curUser={currentUser} setCurUser={setCurrentUser}/>
                     </Route>
 
                     <Route path="/transactions">

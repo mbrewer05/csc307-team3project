@@ -1,5 +1,15 @@
 [![Build Status](https://travis-ci.com/mbrewer05/csc307-team3project.svg?branch=master)](https://travis-ci.com/mbrewer05/csc307-team3project)
 
+# Project Description
+
+This project is a web based budget tracker application. When accessing the web page users can create an account or login with a existing one. Once logged in, the main page users will be working with is the transactions page. This page is where new budget transactions are displayed and created. Users can create new transactions, see and delete old ones, and view their balance in the form of a remaining budget. Users can also view the statistic pages which gives them statistics on their transactions. This pages presents both a pie chart showing user spending in each of their catagories and a graph that shows their spending month by month. Finally there is a settings pages where users can change their settings and button for them to logout.
+
+## [UI Prototype](https://www.figma.com/file/IanX4UMOULQUXCnjJ5jdJN/CSC307-UI-prototype?node-id=0%3A1)
+
+### [Use Case Diagram](https://drive.google.com/file/d/1QuHNBLEVg9l8LJwk7Wt1yhMWETcB7eNF/view?usp=sharing)
+
+### [Class Diagram](https://drive.google.com/file/d/1At0-CTPXMiL09dImGmZfJrM0MwcXG3Q4/view?usp=sharing)
+
 # Style guides:
 
 ## Python (PEP8):
@@ -9,89 +19,49 @@ https://www.python.org/dev/peps/pep-0008/
 https://google.github.io/styleguide/jsguide.html \
 https://airbnb.io/javascript/react/
 
-# Setting up Prettier on VSCode:
-https://create-react-app.dev/docs/setting-up-your-editor \
-Please enable 'format on save' and set 'tab width' to 4 in the Prettier settings
+# Setup
 
-# Getting Started with Create React App
+## Setting up Backend Enviornment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Be sure to have python3 and pip3 installed.
 
-## NPM Setup
+Start the virtual enviornment by navigating to the backend directory and running:
 
-In the frontend directory, run:
+### `. ./bin/activate`
+
+Install the following packages with pip3 to be able to run the project:
+* flask
+* flask_cors
+* flaskMongo
+* dotenv
+* cryptography
+* dnspython
+
+Set enviornmental FLASK_APP=flaskMain.py before running:
+### `flask run`
+in the backend directory to begin the backend server which will run on http://127.0.0.1:5000/.
+
+Be sure to have the proper .env file with encryption key and mongo server credentials.
+
+## Setting up Frontend Enviornment 
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Be sure to have npm installed. 
+
+Navigate to the frontend directory. Run:
 
 ### `npm install`
 
-to install essential packages
+to initialize npm. Then install the following with npm:
 
-## Backend Setup
+### `npm install --save mdbreact`
 
-In the backend directory add .env file with proper database credentials for it to function properly.
-
-## Available Scripts
-
-In the frontend directory, you can run:
+Then Run:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+to begin the frontend server. Open [http://localhost:3000](http://localhost:3000) to access the web page. 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Setting up Prettier on VSCode:
+https://create-react-app.dev/docs/setting-up-your-editor \
+Please enable 'format on save' and set 'tab width' to 4 in the Prettier settings
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

@@ -8,7 +8,7 @@ This project is a web based budget tracker application. When accessing the web p
 
 ### [Use Case Diagram](https://drive.google.com/file/d/1QuHNBLEVg9l8LJwk7Wt1yhMWETcB7eNF/view?usp=sharing)
 
-### [Class Diagram](https://drive.google.com/file/d/1At0-CTPXMiL09dImGmZfJrM0MwcXG3Q4/view?usp=sharing)
+### [Class Diagram](https://drive.google.com/file/d/1lGRItUzJsuDAmmmoSrupw8gXLYrbK5rs/view?usp=sharing)
 
 # Style guides:
 

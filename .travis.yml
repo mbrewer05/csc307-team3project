@@ -1,2 +1,5 @@
 language: python
+install:
+  python -m pip install pymongo
+
 script: pytest backend/sampleTest.py

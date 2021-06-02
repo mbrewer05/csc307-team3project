@@ -1,6 +1,6 @@
 language: python
 install:
-  -python -m pip install pymongo
+  -pip install pymongo
   -pip install bson
   -pip install dnspython
   -pip install python-dotenv

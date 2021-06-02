@@ -125,18 +125,18 @@ class RemainingBalance(Model):
     db_client = pymongo.MongoClient(MONGODB_URL)
     collection = db_client["budget_tracker"]["remaining_balance"]
 
-    def get_val(self):
-        remaining = list(self.collection.find())
+    def get_val(self, userID):
+        remaining = list(self.collection.find({"userID": userID}))
         for balance in remaining:
             balance["_id"] = str(balance["_id"])
         return remaining
     
-    def add_to_balance(self, val):
-        remaining = list(self.collection.find())
+    def add_to_balance(self, userID, val):
+        remaining = list(self.collection.find({"userID": userID}))
         remaining[0]["balance"] += val
-        self.collection.update({"userID": "60a483f4cc4a814ce0cb4139"}, remaining[0])
+        self.collection.update({"userID": userID}, remaining[0])
 
-    def sub_from_balance(self, val):
-        remaining = list(self.collection.find())
+    def sub_from_balance(self, userID, val):
+        remaining = list(self.collection.find({"userID": userID})) 
         remaining[0]["balance"] -= val 
-        self.collection.update({"userID": "60a483f4cc4a814ce0cb4139"}, remaining[0])
+        self.collection.update({"userID": userID}, remaining[0])

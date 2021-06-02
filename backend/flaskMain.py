@@ -30,10 +30,13 @@ def get_users():
         newUser = User(userToAdd)
         newUser['password'] = fernet.encrypt(bytes(newUser['password'], 'utf-8')).decode()
         checkUsernameList = User().find_by_username(newUser['username'])
+        
         if len(checkUsernameList):
             return jsonify({"error": "Username already exists"}), 409
         else:
             newUser.save()
+            newRemainingBalance = RemainingBalance({"userID": newUser["_id"], "balance": 0})
+            newRemainingBalance.save()
             resp = jsonify(newUser), 201
             return resp
         
@@ -103,5 +106,29 @@ def get_transaction(userID, transactionID):
                 transaction.remove()
             else:
                 return jsonify({"error": "Transaction not found"}), 404
+
+@app.route('/users/<userID>/remainingBalance', methods=['GET', 'PATCH', 'DELETE'])
+def get_remaining_balance(userID):
+    if request.method == 'GET':
+        remainingBalance = list(RemainingBalance().get_val(userID))
+        return remainingBalance[0]
+    
+    elif request.method == 'PATCH':
+        transaction = request.get_json()
+
+        if transaction["spent"] == "1":
+            RemainingBalance().sub_from_balance(userID, transaction["amount"])
+        elif transaction["spent"] == "0":
+            RemainingBalance().add_to_balance(userID, transaction["amount"])
+        return jsonify({"Success": "Balance updated"}), 900
+
+    elif request.method == 'DELETE':
+        transaction = request.get_json()
         
+        if transaction["spent"] == "1":
+            RemainingBalance().add_to_balance(userID, transaction["amount"])
+        elif transaction["spent"] == "0":
+            RemainingBalance().sub_from_balance(userID, transaction["amount"])
+        return jsonify({"Success": "Balance updated"}), 800
+
     

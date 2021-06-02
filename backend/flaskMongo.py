@@ -41,6 +41,22 @@ class User(Model):
     MONGODB_URL = os.environ['MONGODB_URL']
     db_client = MongoClient(MONGODB_URL)
     collection = db_client["budget_tracker"]["user_list"]
+    
+    def find_all(self):
+        fernet = Fernet(os.environ['FERNET_KEY'])
+        users = list(self.collection.find({}))
+        for user in users:
+            user["_id"] = str(user["_id"])
+            user["password"] = 'restricted'
+        return users
+    
+    def find_by_username(self, username):
+        fernet = Fernet(os.environ['FERNET_KEY'])
+        users = list(self.collection.find({"username": username}))
+        for user in users:
+            user["_id"] = str(user["_id"])
+            user["password"] = 'restricted'
+        return users
         
     def find_by_username_and_password(self, username, password):
         fernet = Fernet(os.environ['FERNET_KEY'])

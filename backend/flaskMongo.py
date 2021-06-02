@@ -76,8 +76,6 @@ class User(Model):
             users['username'] = settingsToChange['user']['username']
         if settingsToChange['user']['password'] != '':
             users['password'] = fernet.encrypt(bytes(settingsToChange['user']['password'], 'utf-8')).decode()
-        if settingsToChange['user']['budget'] != '':
-            users['budget'] = settingsToChange['user']['budget']
         self.collection.update(
             { "_id": ObjectId(self._id) }, users)
         

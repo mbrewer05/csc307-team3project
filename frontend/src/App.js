@@ -4,7 +4,6 @@ import SettingsPage from "./pages/SettingsPage.js"
 import StatsPage from "./pages/StatsPage.js"
 import LoginPage from "./pages/LoginPage.js"
 import CreateAccPage from "./pages/CreateAccPage.js"
-import LoadingPage from "./pages/LoadingPage.js"
 import "./App.css";
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 

@@ -5,7 +5,7 @@ before-install:
   - "export PYTHONPATH=$PYTHONPATH:$(pwd)"
 
 install:
-  - python -m pip install pymongo
+  - pip install 'pymongo[srv]'
   - pip install bson
   - pip install dnspython
   - pip install python-dotenv

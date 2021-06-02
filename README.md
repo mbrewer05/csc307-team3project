@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/mbrewer05/csc307-team3project.svg?branch=master)](https://travis-ci.com/mbrewer05/csc307-team3project)
+## [Travis CI server](https://travis-ci.com/github/mbrewer05/csc307-team3project)
 
 # Project Description
 

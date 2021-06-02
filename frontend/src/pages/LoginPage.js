@@ -41,6 +41,7 @@ function LoginPage(props) {
     const axios = require('axios');
     const history = useHistory();
     const [user, setUser] = useState({username: '', password: ''});
+    const [error, setError] = React.useState('');
     
     function handleChange(event){
         const {name, value} = event.target;
@@ -62,17 +63,14 @@ function LoginPage(props) {
                         history.push("/transactions");
                     }
                     else{
-                        //error message
+                        setError("error: invalid credentials");
                     }
-                }
-                else{
-                    //error message
                 }
                 setUser({username: user['username'], password: ''});
             });
         }
         else {
-            //error message
+            setError("error: missing fields");
         }
     }
     
@@ -85,6 +83,7 @@ function LoginPage(props) {
         }
         catch (error) {
             console.log(error);
+            setError("error: server side error")
             return false;
         }
     };
@@ -126,6 +125,9 @@ function LoginPage(props) {
                         value={user.password}
                         onChange={handleChange}
     				/>
+                    <Typography component="h1" variant="subtitle1" color="secondary">
+                        {error}
+        			</Typography>
     				<Button
     					fullWidth
     					variant="contained"

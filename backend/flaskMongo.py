@@ -1,9 +1,9 @@
-import pymongo
 from bson import ObjectId
 import dns
 import os
 from dotenv import load_dotenv
 from cryptography.fernet import Fernet
+import pymongo
 
 class Model(dict):
     """

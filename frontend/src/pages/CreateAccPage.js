@@ -38,22 +38,22 @@ function CreateAccPage() {
 	const classes = useStyles();
     const axios = require('axios');
     const history = useHistory();
-    const [newUser, setNewUser] = React.useState({name:'', username:'', password:'', budget:0});
+    const [newUser, setNewUser] = React.useState({name:'', username:'', password:''});
     const [error, setError] = React.useState('');
     
     function handleChange(event){
         const {name, value} = event.target;
         if (name === 'name'){
             setNewUser({name:value, username:newUser['username'], 
-                password:newUser['password'], budget:newUser['budget']});
+                password:newUser['password']});
         }
         else if (name === 'username'){
             setNewUser({name:newUser['name'], username:value, 
-                password:newUser['password'], budget:newUser['budget']});
+                password:newUser['password']});
         }
         else if (name === 'password'){
             setNewUser({name:newUser['name'], username:newUser['username'], 
-                password:value, budget:newUser['budget']});
+                password:value});
         }
     }
     
@@ -61,7 +61,7 @@ function CreateAccPage() {
         if(newUser['name'] && newUser['username'] && newUser['password']){
             makePostCall().then(result => {
                 if(result.status == 201){
-                    setNewUser({name:'', username:'', password:'', budget:0});
+                    setNewUser({name:'', username:'', password:''});
                     history.push("/login");
                 }
             });

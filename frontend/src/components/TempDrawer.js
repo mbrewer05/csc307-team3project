@@ -47,9 +47,6 @@ function TempDrawer() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                <ListItem button key={"Profile"} component={Link} to="/profile">
-                    <ListItemText primary={"Profile"} />
-                </ListItem>
                 <ListItem button key={"Transactions"} component={Link} to="/transactions">
                     <ListItemText primary={"Transactions"} />
                 </ListItem>

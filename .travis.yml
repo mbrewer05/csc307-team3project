@@ -5,11 +5,12 @@ before-install:
   - "export PYTHONPATH=$PYTHONPATH:$(pwd)"
 
 install:
+  - pip3 uninstall bson
+  - pip3 uninstall pymongo
   - pip3 install pymongo
   - pip3 install dnspython
   - pip3 install python-dotenv
   - pip3 install pytest-dotenv
   - pip3 install cryptography
-  - pip3 install bson
 
 script: pytest backend/sampleTest.py

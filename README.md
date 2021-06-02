@@ -6,9 +6,9 @@ This project is a web-based budget tracker application. When accessing the web p
 
 ## [UI Prototype](https://www.figma.com/file/IanX4UMOULQUXCnjJ5jdJN/CSC307-UI-prototype?node-id=0%3A1)
 
-### [Use Case Diagram](https://drive.google.com/file/d/1QuHNBLEVg9l8LJwk7Wt1yhMWETcB7eNF/view?usp=sharing)
+### [Use Case Diagram](https://github.com/mbrewer05/csc307-team3project/blob/master/images/307_Team3_UseCaseDiagram.png) [(source)](https://drive.google.com/file/d/1QuHNBLEVg9l8LJwk7Wt1yhMWETcB7eNF/view?usp=sharing)
 
-### [Class Diagram](https://drive.google.com/file/d/1lGRItUzJsuDAmmmoSrupw8gXLYrbK5rs/view?usp=sharing)
+### [Class Diagram](https://github.com/mbrewer05/csc307-team3project/blob/master/images/307_Team3_ClassDiagram.png) [(source)](https://drive.google.com/file/d/1lGRItUzJsuDAmmmoSrupw8gXLYrbK5rs/view?usp=sharing)
 
 # Style guides:
 

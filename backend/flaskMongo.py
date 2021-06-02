@@ -3,7 +3,7 @@ import dns
 import os
 from dotenv import load_dotenv
 from cryptography.fernet import Fernet
-import pymongo
+from pymongo import MongoClient
 
 class Model(dict):
     """
@@ -39,7 +39,7 @@ class Model(dict):
 class User(Model):
     load_dotenv()
     MONGODB_URL = os.environ['MONGODB_URL']
-    db_client = pymongo.MongoClient(MONGODB_URL)
+    db_client = MongoClient(MONGODB_URL)
     collection = db_client["budget_tracker"]["user_list"]
 
     def find_all(self):
@@ -85,7 +85,7 @@ class User(Model):
 class Transaction(Model):
     load_dotenv()
     MONGODB_URL = os.environ['MONGODB_URL']
-    db_client = pymongo.MongoClient(MONGODB_URL)
+    db_client = MongoClient(MONGODB_URL)
     collection = db_client["budget_tracker"]["transaction_list"]
 
     def find_all(self):
@@ -122,7 +122,7 @@ class Transaction(Model):
 class RemainingBalance(Model):
     load_dotenv()
     MONGODB_URL = os.environ['MONGODB_URL']
-    db_client = pymongo.MongoClient(MONGODB_URL)
+    db_client = MongoClient(MONGODB_URL)
     collection = db_client["budget_tracker"]["remaining_balance"]
 
     def get_val(self, userID):

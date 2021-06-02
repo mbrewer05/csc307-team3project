@@ -3,19 +3,24 @@ from flaskMongo import *
 
 testUserID = "60b6fa44b65b73db02a27417"
 
-def test_user_find_by_username():
-   expected = [{'_id': '60b6fa44b65b73db02a27417',
-               'budget': 0, 'name': 'TEST TEST',
-               'password': 'gAAAAABgtvpE6RFUslCbvUrYg9O6YVMjCqJ2-SbW6kEYpl7JPVMXhuLonmHOKTBo6cT_2OTaqT5QC-ICAFuXDwBD3AyeYyNjNQ==',
-               'username': 'test'}]
-   assert User().find_by_username("test") == expected
-
 def test_user_find_by_username_and_password():
    expected = [{'_id': '60b6fa44b65b73db02a27417',
                'budget': 0, 'name': 'TEST TEST',
                'password': 'gAAAAABgtvpE6RFUslCbvUrYg9O6YVMjCqJ2-SbW6kEYpl7JPVMXhuLonmHOKTBo6cT_2OTaqT5QC-ICAFuXDwBD3AyeYyNjNQ==',
                'username': 'test'}]
    assert User().find_by_username_and_password('test', 'test') == expected
+
+def test_user_patch():
+   user = {'name': '', 'username': '', 'password': ''}
+   settingsToChange = {'user': user}
+   settingsToChange['user']['name'] = 'notTestName'
+   settingsToChange['user']['username'] = 'notTestUsername'
+   settingsToChange['user']['password'] = 'notTestPassword'
+   User().patch(settingsToChange, testUserID)
+   settingsToChange['user']['name'] = 'test'
+   settingsToChange['user']['username'] = 'test'
+   settingsToChange['user']['password'] = 'test'
+   User().patch(settingsToChange, testUserID)
 
 def test_transaction_find_by_user():
   assert Transaction().find_by_user(testUserID)[0]['amount'] == 20

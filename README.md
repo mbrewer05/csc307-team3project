@@ -17,7 +17,7 @@ Please enable 'format on save' and set 'tab width' to 4 in the Prettier settings
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## NPM Setp
+## NPM Setup
 
 In the frontend directory, run:
 

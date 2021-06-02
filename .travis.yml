@@ -7,11 +7,11 @@ before-install:
 install:
   - pip uninstall pymongo
   - pip uninstall bson
-  - pip install bson
   - pip install pymongo
   - pip install dnspython
   - pip install python-dotenv
   - pip install pytest-dotenv
   - pip install cryptography
+  - pip install bson
 
 script: pytest backend/sampleTest.py

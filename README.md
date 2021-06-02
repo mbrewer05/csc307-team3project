@@ -21,11 +21,12 @@ https://airbnb.io/javascript/react/
 
 Be sure to have python3 and pip3 installed.
 
-We are running python3 flask for out backend server. Use:
-### `pip3 install flask`
-to install flask. 
+Start the virtual enviornment by navigating to the backend directory and running:
+
+### `. ./bin/activate`
 
 Install the following packages with pip3 to be able to run the project:
+* flask
 * flask_cors
 * flaskMongo
 * dotenv
@@ -46,10 +47,9 @@ Navigate to the frontend directory. Run:
 
 ### `npm install`
 
-to install the necessary modules and packages:
-* @material-ui/core
-* --save mdbreact
-* mdb-react-ui-kit
+to initialize npm. Then install the following with npm:
+
+### `npm install --save mdbreact`
 
 Then Run:
 

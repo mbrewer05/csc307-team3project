@@ -112,8 +112,31 @@ class Transaction(Model):
             transaction["_id"] = str(transaction["_id"])
         return transactions
     
-    def find_by_spent(self, spent):
-        transactions = list(self.collection.find({"spent": spent}))
+    def find_by_spent(self, user, spent):
+        transactions = list(self.collection.find({"userID": user, "spent": spent}))
         for transaction in transactions:
             transaction["_id"] = str(transaction["_id"])
         return transactions
+
+
+class RemainingBalance(Model):
+    load_dotenv()
+    MONGODB_URL = os.environ['MONGODB_URL']
+    db_client = pymongo.MongoClient(MONGODB_URL)
+    collection = db_client["budget_tracker"]["remaining_balance"]
+
+    def get_val(self, userID):
+        remaining = list(self.collection.find({"userID": userID}))
+        for balance in remaining:
+            balance["_id"] = str(balance["_id"])
+        return remaining
+    
+    def add_to_balance(self, userID, val):
+        remaining = list(self.collection.find({"userID": userID}))
+        remaining[0]["balance"] += val
+        self.collection.update({"userID": userID}, remaining[0])
+
+    def sub_from_balance(self, userID, val):
+        remaining = list(self.collection.find({"userID": userID})) 
+        remaining[0]["balance"] -= val 
+        self.collection.update({"userID": userID}, remaining[0])

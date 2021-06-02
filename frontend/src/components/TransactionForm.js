@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function TransactionForm(props) {
-  const [transaction, setTransaction] = React.useState({date: '', amount: 0, spent: '', category: '', description: ''});
+  const [transaction, setTransaction] = React.useState({userID: localStorage.getItem('currentUser'), date: '', amount: 0, spent: '', category: '', description: ''});
   const classes = useStyles();
   const [val, setVal] = React.useState('');
   const [value, setValue] = React.useState('spend');

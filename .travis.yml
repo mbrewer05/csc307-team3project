@@ -4,6 +4,7 @@ install:
   pip install bson
   pip install dnspython
   pip install python-dotenv
+  pip install pytest-dotenv
   pip install cryptography
 
 script: pytest backend/sampleTest.py

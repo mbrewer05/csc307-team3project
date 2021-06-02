@@ -53,7 +53,6 @@ function TransactionTable(props) {
             <StyledTableCell>Description</StyledTableCell>
             <StyledTableCell>Category</StyledTableCell>
             <StyledTableCell align="right">Amount</StyledTableCell>
-            <StyledTableCell align="right">Spent/Gained</StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -65,9 +64,7 @@ function TransactionTable(props) {
               </TableCell>
               <TableCell>{row.description}</TableCell>
               <TableCell>{row.category}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-              <TableCell align="right">{row.balance}</TableCell>
-              <TableCell align="left">{row.spent=="1" ? "Spent" : "Gained"}</TableCell>
+              <TableCell align="right">{row.spent=="1" ? "-$"+String(row.amount) : "$"+String(row.amount)}</TableCell>
               <Grid
                 container
                 direction="row"

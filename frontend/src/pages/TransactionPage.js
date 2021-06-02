@@ -75,12 +75,13 @@ function TransactionPage(props) {
 
     async function makePostCall(transaction) {
         try {
+            var requestPostOne = ''
             let postOne =
                 "http://localhost:5000/users/" + localStorage.getItem("currentUser") + "/transactions";
             let patchTwo =
                 "http://localhost:5000/users/" + localStorage.getItem("currentUser") + "/remainingBalance";
 
-            const requestPostOne = axios.post(postOne, transaction);
+            requestPostOne = axios.post(postOne, transaction);
             const requestPatchTwo = axios.patch(patchTwo, transaction);
 
             axios.all([requestPostOne, requestPatchTwo]).then(
@@ -89,7 +90,7 @@ function TransactionPage(props) {
                     const responsePatchTwo = responses[1];
                 })
             );
-            
+            return requestPostOne
             // const response = await axios.post('http://localhost:5000/users/60a483f4cc4a814ce0cb4139/transactions', transaction);
             // const response = await axios.patch(
             //     "http://localhost:5000/users/60a483f4cc4a814ce0cb4139/remainingBalance",

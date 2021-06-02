@@ -1,7 +1,7 @@
 language: python
 
 before-install:
-  - "pip install -U pip3"
+  - "pip install -U pip"
   - "export PYTHONPATH=$PYTHONPATH:$(pwd)"
 
 install:

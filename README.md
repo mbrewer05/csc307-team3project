@@ -30,7 +30,7 @@ in the backend directory to begin the backend server which will run on http://12
 
 Be sure to have the proper .env file with encryption key and mongo server credentials.
 
-# Setting up Front Enviornment 
+# Setting up Frontend Enviornment 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Be sure to have npm installed. 
 
@@ -38,7 +38,10 @@ Navigate to the frontend directory. Run:
 
 ### `npm install`
 
-to install the necessary modules and packages.
+to install the necessary modules and packages:
+* @material-ui/core
+* --save mdbreact
+* mdb-react-ui-kit
 
 Then Run:
 

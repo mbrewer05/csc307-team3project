@@ -23,7 +23,7 @@ function SettingsPage(props) {
 
   async function submitSettingsForm() {
     try{
-      const response = await axios.patch('http://localhost:5000/users' + localStorage.getItem('currentUser'), {user})
+      const response = await axios.patch('http://localhost:5000/users/' + localStorage.getItem('currentUser'), {user})
       return response
     }
     catch(error){

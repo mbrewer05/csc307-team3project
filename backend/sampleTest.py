@@ -75,3 +75,29 @@ def test_RemBal_sub_from_balance():
    postAdd = RemainingBalance().get_val(testUserID)[0]['balance']
 
    assert postAdd == preAdd - 10
+
+def test_user_reload_true():
+    user = User({"_id": "60b6fa44b65b73db02a27417"})
+    assert user.reload()
+
+def test_user_realod_false():
+    user = User({"_id": "60b6fa44b65b73db02a27747"})
+    assert not(user.reload())
+
+def test_user_create():
+    user = User({"username":"testCreate", "password":"examplePass", "name":"testCreate"})
+    user.save()
+    assert user.reload()
+    
+def test_user_update():
+    user = User({'_id': "60b6fa44b65b73db02a27417"})
+    user.reload()
+    user._id = ObjectId(user._id)
+    user.save()
+    assert user.reload()
+    
+def test_user_delete():
+    user = User(User().find_by_username("testCreate")[0])
+    user.remove()
+    assert not(user.reload())
+    

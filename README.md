@@ -55,6 +55,7 @@ Navigate to the frontend directory. Run:
 to initialize npm. Then install the following with npm:
 
 ### `npm install --save mdbreact`
+### `npm i mdb-ui-kit`
 
 Then Run:
 

@@ -52,7 +52,7 @@ function TransactionTable(props) {
             <StyledTableCell>Date</StyledTableCell>
             <StyledTableCell>Description</StyledTableCell>
             <StyledTableCell>Category</StyledTableCell>
-            <StyledTableCell align="right">Amount</StyledTableCell>
+            <StyledTableCell>Amount</StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -64,16 +64,13 @@ function TransactionTable(props) {
               </TableCell>
               <TableCell>{row.description}</TableCell>
               <TableCell>{row.category}</TableCell>
-              <TableCell align="right">{row.spent=="1" ? "-$"+String(row.amount) : "$"+String(row.amount)}</TableCell>
+              <TableCell>{row.spent=="1" ? "-$"+String(row.amount) : "$"+String(row.amount)}</TableCell>
               <Grid
                 container
                 direction="row"
                 alignItems="center"
                 justify="center"
               >
-                &nbsp;
-                &nbsp;
-                &nbsp;
                 <Button
                   id="button-delete"
                   color="secondary"

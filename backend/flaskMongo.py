@@ -42,19 +42,19 @@ class User(Model):
     db_client = pymongo.MongoClient(MONGODB_URL)
     collection = db_client["budget_tracker"]["user_list"]
 
-    def find_all(self):
-        users = list(self.collection.find())
-        for user in users:
-            user["_id"] = str(user["_id"])
-            user["password"] = str(user["password"])
-        return users
+    # def find_all(self):
+    #     users = list(self.collection.find())
+    #     for user in users:
+    #         user["_id"] = str(user["_id"])
+    #         user["password"] = str(user["password"])
+    #     return users
 
-    def find_by_username(self, username):
-        users = list(self.collection.find({"username": username}))
-        for user in users:
-            user["_id"] = str(user["_id"])
-            user["password"] = str(user["password"])
-        return users
+    # def find_by_username(self, username):
+    #     users = list(self.collection.find({"username": username}))
+    #     for user in users:
+    #         user["_id"] = str(user["_id"])
+    #         user["password"] = str(user["password"])
+    #     return users
         
     def find_by_username_and_password(self, username, password):
         fernet = Fernet(os.environ['FERNET_KEY'])

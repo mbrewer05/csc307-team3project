@@ -3,10 +3,10 @@ language: python
 before-install:
   - "pip install -U pip"
   - "export PYTHONPATH=$PYTHONPATH:$(pwd)"
-  
+
 install:
+  - python -m pip install pymongo
   - pip install bson
-  - pip install pymongo
   - pip install dnspython
   - pip install python-dotenv
   - pip install pytest-dotenv

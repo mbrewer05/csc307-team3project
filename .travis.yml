@@ -1,5 +1,7 @@
 language: python
 install:
+  pip uninstall bson
+  pip uninstall pymongo
   python -m pip install pymongo
   pip install bson
   pip install dnspython

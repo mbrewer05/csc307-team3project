@@ -53,7 +53,7 @@ function TransactionTable(props) {
             <StyledTableCell>Description</StyledTableCell>
             <StyledTableCell>Category</StyledTableCell>
             <StyledTableCell align="right">Amount</StyledTableCell>
-            <StyledTableCell align="right">Remaining Balance</StyledTableCell>
+            <StyledTableCell align="right">Spent?</StyledTableCell>
             <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
@@ -67,6 +67,7 @@ function TransactionTable(props) {
               <TableCell>{row.category}</TableCell>
               <TableCell align="right">{row.amount}</TableCell>
               <TableCell align="right">{row.balance}</TableCell>
+              <TableCell align="left">{row.spent}</TableCell>
               <Grid
                 container
                 direction="row"
@@ -74,14 +75,14 @@ function TransactionTable(props) {
                 justify="center"
               >
                 &nbsp;
-                <Button
+                {/* <Button
                   id="button-edit"
                   color="inherit"
                   variant="contained"
                   disableElevation
                 >
                   Edit
-                </Button>
+                </Button> */}
                 &nbsp;
                 &nbsp;
                 <Button
